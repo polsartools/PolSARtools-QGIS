@@ -23,6 +23,7 @@ This plugin generates derived SAR parameters from input polarimetric matrix (C3,
 from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtWidgets import *
 from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtCore import QProcess
 
 from qgis.PyQt import *
 from qgis.core import *
@@ -39,6 +40,8 @@ import os.path
 import sys
 # import os
 # import os
+import polsartools as pst
+import re
 from osgeo import gdal
 import time
 from PyQt5 import QtWidgets
@@ -55,10 +58,8 @@ from .functions.fp.mod_NM3CF import NM3CF
 from .functions.fp.mod_MF4CF import MF4CF
 from .functions.fp.mod_GRVI import GRVI
 from .functions.fp.mod_PRVI import PRVI
-from .functions.fp.mod_dop_fp import dop_FP
+# from .functions.fp.mod_dop_fp import dop_FP
 from .functions.fp.mod_RVIFP import RVI_FP
-
-from .functions.dcop.mod_MF3CD import MF3CD
 
 from .functions.cp.mod_dop_cp import dop_cp
 from .functions.cp.mod_CpRVI import CpRVI
@@ -390,11 +391,11 @@ class MRSLab(object):
                     self.dtype_error()
                     
             if indX==4:
-                try:
+                # try:
                     logger.append('->> --------------------')
                     self.startDOPfp()
-                except:
-                    self.dtype_error()
+                # except:
+                #     self.dtype_error()
             if indX==5:
                 try:
                     logger.append('->> --------------------')
@@ -778,31 +779,30 @@ class MRSLab(object):
         """Open raster from file dialog"""
         # logger.append(str(self.dlg.tabWidget.currentIndex()))
         self.showTip() # pop-up tip
-        pB = self.dlg.progressBar
-        pB.setValue(0)
+        
         if self.dlg.tabWidget.currentIndex() == 0:
             self.inFolder = str(QFileDialog.getExistingDirectory(
                             self.dlg, "Select T3/C3 Folder"))                   
             self.dlg.inFolder_fp.setText(self.inFolder)
             
-            if self.inFolder:
-                try:
-                    self.T3_stack = self.load_T3(self.inFolder)
-                    logger.append('->> Ready to process. Click the "process" button!')
+            # if self.inFolder:
+            #     try:
+            #         self.T3_stack = self.load_T3(self.inFolder)
+            #         logger.append('->> Ready to process. Click the "process" button!')
                     
-                except:
-                    try:
-                        self.C3_stack = self.load_C3(self.inFolder)
-                        logger.append('->> C3 Loaded \n->> Converting C3 to T3...')
+            #     except:
+            #         try:
+            #             self.C3_stack = self.load_C3(self.inFolder)
+            #             logger.append('->> C3 Loaded \n->> Converting C3 to T3...')
 
-                        self.T3_stack  = self.C3_T3(self.C3_stack)
+            #             self.T3_stack  = self.C3_T3(self.C3_stack)
                         
-                        logger.append('->> Ready to process. Click the "process" button!')
-                        self.dlg.fp_ws.setEnabled(True)
-                        self.dlg.fp_parm.setEnabled(True)
-                    except:
-                        logger.append('->> Error! \n->> Please select a valid C3/T3 folder')
-                        self.showError3()
+            #             logger.append('->> Ready to process. Click the "process" button!')
+            #             self.dlg.fp_ws.setEnabled(True)
+            #             self.dlg.fp_parm.setEnabled(True)
+            #         except:
+            #             logger.append('->> Error! \n->> Please select a valid C3/T3 folder')
+            #             self.showError3()
             
             # if self.inFolder:
             #     self.dlg.fp_ws.setEnabled(True)
@@ -845,7 +845,7 @@ class MRSLab(object):
                     logger.append('->> Error! \n->> Please select a valid C2 folder')
                     self.showError2()
 
-        pB.setValue(0)
+
 
             
 ###############################################################
@@ -900,18 +900,6 @@ class MRSLab(object):
         
         return np.dstack((T11,T12,T13,np.conj(T12),T22,T23,np.conj(T13),np.conj(T23),T33))
     
-    def load_T2(self,folder):
-    
-        T11 = self.read_bin(folder+"/T11.bin")
-        T22 = self.read_bin(folder+"/T22.bin")
-    
-        T12_i = self.read_bin(folder+'/T12_imag.bin')
-        T12_r = self.read_bin(folder+'/T12_real.bin')
-    
-        T12 = T12_r + 1j*T12_i
-    
-        return np.dstack((T11,T12,np.conj(T12),T22))
-
     def read_bin(self,file):
         ds = gdal.Open(file)
         band = ds.GetRasterBand(1)
@@ -999,28 +987,38 @@ class MRSLab(object):
         self.worker = worker
         # time.sleep(0.1)
         # worker.kill
-            
+    
+
+    def handle_stdout(self):
+        output = self.process.readAllStandardOutput().data().decode()
+        lines = output.splitlines()
+        for line in lines:
+            self.dlg.terminal.append(line.strip())
+            match = re.search(r' \[PROGRESS\](\d+)', line)
+            if match:
+                percent = int(match.group(1))
+                self.pBarupdate(percent)
+                
+    def handle_stderr(self):
+        error_output = self.process.readAllStandardError().data().decode().strip()
+        print("QProcess Error:", error_output)
+        # Optionally log to terminal or show warning
+    def handle_finished(self, exitCode, exitStatus):
+        print(f"Process finished with exit code: {exitCode}, status: {exitStatus}")
+
     def startDOPfp(self):  
-        self.dlg.terminal.append('->> Calculating DOP...')
-        worker = dop_FP(self.inFolder,self.T3_stack,self.ws)
-
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
-
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+        self.dlg.terminal.append('->> Calculating DOP pst...')
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.
-
+        script_path = os.path.join(os.path.dirname(__file__), "functions/fp/run_dopfp.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
+        
 
     def startPRVI(self):  
         self.dlg.terminal.append('->> Calculating PRVI...')
@@ -1290,29 +1288,6 @@ class MRSLab(object):
         worker.error.connect(self.workerError)
         # time.sleep(0.1)
         # worker.kill
-
-    def startMF3CD(self):
-        
-        self.dlg.terminal.append('->> Calculating MF3CD...')
-        worker = MF3CD(self.inFolder,self.T2_stack,self.ws)
-
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
-
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
-        
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.kill
-
     def cancel_fn(self):
         # self.sig_abort_workers.emit()
         self.dlg.terminal.append('->> cancelling...')
