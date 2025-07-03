@@ -317,15 +317,15 @@ class MRSLab(object):
     # Print the tab/polarimetric mode update to the logger 
     def ontabChange(self,i): #changed!
         if i==0:
-            # logger.append("->> Full-pol")
+            # logger.append("(polsartools) $ Full-pol")
             pol_mode = i            
             # logger.append(str(pol_mode))
         if i==1:
-            # logger.append("->> Compact-pol")
+            # logger.append("(polsartools) $ Compact-pol")
             pol_mode = i
             # logger.append(str(pol_mode))
         if i==2:
-            # logger.append("->> Dual-pol")
+            # logger.append("(polsartools) $ Dual-pol")
             pol_mode = i
             # logger.append(str(pol_mode))
             
@@ -353,11 +353,11 @@ class MRSLab(object):
         if self.ws%2==0:
             self.ws+=1
         # logger = self.dlg.terminal
-        # logger.append('->> Window size: '+str(self.ws))
+        # logger.append('(polsartools) $ Window size: '+str(self.ws))
         
  
     def dtype_error(self):
-        logger.append('->> Error!! Invalid data folder.')
+        logger.append('(polsartools) $ Error!! Invalid data folder.')
                  
     def startProcess(self):
         
@@ -371,40 +371,40 @@ class MRSLab(object):
             
             if indX==1:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startGRVI()
                 except:
                     self.dtype_error()
                     
             if indX==2:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startNM3CF()
                 except:
                     self.dtype_error()
                     
             if indX==3:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startPRVI()
                 except:
                     self.dtype_error()
                     
             if indX==4:
                 # try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startDOPfp()
                 # except:
                 #     self.dtype_error()
             if indX==5:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startRVIFP()
                 except:
                     self.dtype_error()
             if indX==6:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startMF4CF()
                 except:
                     self.dtype_error()
@@ -417,28 +417,28 @@ class MRSLab(object):
             indX =self.dlg.cp_parm.currentIndex()  
             if indX==1:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startNM3CC()
                 except:
                     self.dtype_error()
             
             if indX==2:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startDOPCP()
                 except:
                     self.dtype_error()
                     
             if indX==3:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startCPRVI()
                 except:
                     self.dtype_error()
 
             if indX==4:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startiSOmega()
                 except:
                     self.dtype_error()
@@ -451,27 +451,27 @@ class MRSLab(object):
             indX =self.dlg.dp_parm.currentIndex()   
             if indX==1:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startDpRVI()
                 except:
                     self.dtype_error()
 
             if indX==2:
                 try:
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startPRVIdp()
                 except:
                     self.dtype_error()
 
             if indX==3:
                 try:                    
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startDOPdp()
                 except:
                     self.dtype_error()
             if indX==4:
                 try:                    
-                    logger.append('->> --------------------')
+                    logger.append('(polsartools) $ --------------------')
                     self.startRVIdp()
                 except:
                     self.dtype_error()
@@ -496,14 +496,14 @@ class MRSLab(object):
         if self.dlg.tabWidget.currentIndex() == 0:
             parm =self.dlg.fp_parm.currentIndex()
             if parm == 1:
-                # logger.append('->>      GRVI')
+                # logger.append('(polsartools) $      GRVI')
                 self.dlg.inFolder_fp.setEnabled(True)
                 self.dlg.fp_browse.setEnabled(True)
                 # self.dlg.fp_cb_T3.setChecked(True)
                 # self.dlg.fp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             elif parm == 2:
-                # logger.append('->>      MF3CF')
+                # logger.append('(polsartools) $      MF3CF')
                 self.dlg.inFolder_fp.setEnabled(True)
                 self.dlg.fp_browse.setEnabled(True)
                 # self.dlg.fp_cb_T3.setChecked(True)
@@ -511,28 +511,28 @@ class MRSLab(object):
                 # self.dlg.fp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             elif parm == 3:
-                # logger.append('->>      PRVI')
+                # logger.append('(polsartools) $      PRVI')
                 self.dlg.inFolder_fp.setEnabled(True)
                 self.dlg.fp_browse.setEnabled(True)
                 # self.dlg.fp_cb_T3.setChecked(True)
                 # self.dlg.fp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             elif parm == 4:
-                # logger.append('->>      DOP')
+                # logger.append('(polsartools) $      DOP')
                 self.dlg.inFolder_fp.setEnabled(True)
                 self.dlg.fp_browse.setEnabled(True)
                 # self.dlg.fp_cb_T3.setChecked(True)
                 # self.dlg.fp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             elif parm == 5:
-                # logger.append('->>      RVI')
+                # logger.append('(polsartools) $      RVI')
                 self.dlg.inFolder_fp.setEnabled(True)
                 self.dlg.fp_browse.setEnabled(True)
                 # self.dlg.fp_cb_T3.setChecked(True)
                 # self.dlg.fp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             elif parm == 6:
-                # logger.append('->>      MF4CF')
+                # logger.append('(polsartools) $      MF4CF')
                 self.dlg.inFolder_fp.setEnabled(True)
                 self.dlg.fp_browse.setEnabled(True)
                 # self.dlg.fp_cb_T3.setChecked(True)
@@ -550,7 +550,7 @@ class MRSLab(object):
             parm =self.dlg.cp_parm.currentIndex()
             # tau = self.dlg.cp_cb_tau.currentIndex()
             if parm == 1:
-                # logger.append('->>     MF3CC')
+                # logger.append('(polsartools) $     MF3CC')
                 self.dlg.inFolder_cp.setEnabled(True)
                 self.dlg.cp_browse.setEnabled(True)
                 # self.dlg.cp_cb_C2.setChecked(True)
@@ -558,7 +558,7 @@ class MRSLab(object):
                 self.dlg.pb_process.setEnabled(True)
             
             if parm == 2:
-                # logger.append('->>     DOP')
+                # logger.append('(polsartools) $     DOP')
                 self.dlg.inFolder_cp.setEnabled(True)
                 self.dlg.cp_browse.setEnabled(True)
                 # self.dlg.cp_cb_C2.setChecked(True)
@@ -566,7 +566,7 @@ class MRSLab(object):
                 self.dlg.pb_process.setEnabled(True)
             
             if parm == 3:
-                # logger.append('->>    CpRVI')
+                # logger.append('(polsartools) $    CpRVI')
                 self.dlg.inFolder_cp.setEnabled(True)
                 self.dlg.cp_browse.setEnabled(True)
                 # self.dlg.cp_cb_C2.setChecked(True)
@@ -574,7 +574,7 @@ class MRSLab(object):
                 self.dlg.pb_process.setEnabled(True)
             
             if parm == 4:
-                # logger.append('->>    CpRVI')
+                # logger.append('(polsartools) $    CpRVI')
                 self.dlg.inFolder_cp.setEnabled(True)
                 self.dlg.cp_browse.setEnabled(True)
                 # self.dlg.cp_cb_C2.setChecked(True)
@@ -595,28 +595,28 @@ class MRSLab(object):
             parm =self.dlg.dp_parm.currentIndex()
             
             if parm == 1:
-                # logger.append('->>      DpRVI')
+                # logger.append('(polsartools) $      DpRVI')
                 # self.dlg.dp_cb_C2.setChecked(True)
                 self.dlg.inFolder_dp.setEnabled(True)
                 self.dlg.dp_browse.setEnabled(True)
                 # self.dlg.dp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             if parm == 2:
-                # logger.append('->>      PRVI')
+                # logger.append('(polsartools) $      PRVI')
                 # self.dlg.dp_cb_C2.setChecked(True)
                 self.dlg.inFolder_dp.setEnabled(True)
                 self.dlg.dp_browse.setEnabled(True)
                 # self.dlg.dp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             if parm == 3:
-                # logger.append('->>      DOP')
+                # logger.append('(polsartools) $      DOP')
                 # self.dlg.dp_cb_C2.setChecked(True)
                 self.dlg.inFolder_dp.setEnabled(True)
                 self.dlg.dp_browse.setEnabled(True)
                 # self.dlg.dp_ws.setEnabled(True)
                 self.dlg.pb_process.setEnabled(True)
             if parm == 4:
-                # logger.append('->>      RVI')
+                # logger.append('(polsartools) $      RVI')
                 # self.dlg.dp_cb_C2.setChecked(True)
                 self.dlg.inFolder_dp.setEnabled(True)
                 self.dlg.dp_browse.setEnabled(True)
@@ -633,9 +633,9 @@ class MRSLab(object):
             
     def viewData(self):
         # log_text = self.dlg.terminal
-        # log_text.append('->> Data loaded in to QGIS\n')
+        # log_text.append('(polsartools) $ Data loaded in to QGIS\n')
         
-        file_filter = "bin (*.bin);;GeoTiFF (*.tif);;All (*.*)"
+        file_filter = "All (*.*);;GeoTiFF (*.tif);;bin (*.bin)"
                                           
         if self.inFolder:
             f_path = self.inFolder
@@ -655,7 +655,7 @@ class MRSLab(object):
                     logger.append(str(names[0][i]))
 
                 except:
-                    logger.append("->> invalid file type!!")
+                    logger.append("(polsartools) $ invalid file type!!")
 
         # logger.append(str(np.size(list(names[0][0:]))))
         # logger.append(str(f_path))    
@@ -785,29 +785,6 @@ class MRSLab(object):
                             self.dlg, "Select T3/C3 Folder"))                   
             self.dlg.inFolder_fp.setText(self.inFolder)
             
-            # if self.inFolder:
-            #     try:
-            #         self.T3_stack = self.load_T3(self.inFolder)
-            #         logger.append('->> Ready to process. Click the "process" button!')
-                    
-            #     except:
-            #         try:
-            #             self.C3_stack = self.load_C3(self.inFolder)
-            #             logger.append('->> C3 Loaded \n->> Converting C3 to T3...')
-
-            #             self.T3_stack  = self.C3_T3(self.C3_stack)
-                        
-            #             logger.append('->> Ready to process. Click the "process" button!')
-            #             self.dlg.fp_ws.setEnabled(True)
-            #             self.dlg.fp_parm.setEnabled(True)
-            #         except:
-            #             logger.append('->> Error! \n->> Please select a valid C3/T3 folder')
-            #             self.showError3()
-            
-            # if self.inFolder:
-            #     self.dlg.fp_ws.setEnabled(True)
-            #     self.dlg.fp_parm.setEnabled(True)
-                
                 
         if self.dlg.tabWidget.currentIndex() == 1:
             self.inFolder = str(QFileDialog.getExistingDirectory(
@@ -816,13 +793,13 @@ class MRSLab(object):
             
             if self.inFolder:
                 try:
-                    # logger.append('->> C2 selected')
+                    # logger.append('(polsartools) $ C2 selected')
                     self.C2_stack = self.load_C2(self.inFolder)
-                    logger.append('->> Ready to process.')
+                    logger.append('(polsartools) $ Ready to process.')
                     self.dlg.cp_ws.setEnabled(True)
                     self.dlg.cp_parm.setEnabled(True)
                 except:
-                    logger.append('->> Error! \n->> Please select a valid C2 folder')
+                    logger.append('(polsartools) $ Error! \n(polsartools) $ Please select a valid C2 folder')
                     self.showError2()
             
             # if self.inFolder:
@@ -836,13 +813,13 @@ class MRSLab(object):
             
             if self.inFolder:
                 try:
-                    logger.append('->> C2 selected')
+                    logger.append('(polsartools) $ C2 selected')
                     self.C2_stack = self.load_C2(self.inFolder)
-                    logger.append('->> Ready to process.')
+                    logger.append('(polsartools) $ Ready to process.')
                     self.dlg.dp_ws.setEnabled(True)
                     self.dlg.dp_parm.setEnabled(True)
                 except:
-                    logger.append('->> Error! \n->> Please select a valid C2 folder')
+                    logger.append('(polsartools) $ Error! \n(polsartools) $ Please select a valid C2 folder')
                     self.showError2()
 
 
@@ -950,14 +927,14 @@ class MRSLab(object):
         logger.append("\t================================\n")
         logger.append("\t This plugin generates Polarimetric SAR parameters.")
         logger.append("\t   🔹 SAR Indices       🔹 Decomposition Parameters\n")
-        logger.append("\t-----------------------------------------------------------------\n\n")
+        logger.append("\t-----------------------------------------------------------------\n")
         logger.append('Tip: Start by selecting a parameter from the "Select Parameter" dropdown menu.\n')
 
         """ Process button calls"""
 
     def startPRVIdp(self):
         
-        self.dlg.terminal.append('->> Calculating PRVI... ')
+        self.dlg.terminal.append('(polsartools) $ Calculating PRVI... ')
         worker = PRVI_dp(self.inFolder,self.C2_stack,self.ws)
 
         # start the worker in a new thread
@@ -979,7 +956,7 @@ class MRSLab(object):
 
     def startDOPdp(self):
         
-        self.dlg.terminal.append('->> Calculating DOP... ')
+        self.dlg.terminal.append('(polsartools) $ Calculating DOP... ')
         worker = dop_dp(self.inFolder,self.C2_stack,self.ws)
 
         # start the worker in a new thread
@@ -1015,6 +992,9 @@ class MRSLab(object):
         print("QProcess Error:", error_output)
         # Optionally log to terminal or show warning
     def handle_finished(self, exitCode, exitStatus):
+        self.dlg.terminal.append('\n(polsartools) $ Ready to process.')
+        path = os.path.realpath(self.inFolder)
+        os.startfile(path)
         print(f"Process finished with exit code: {exitCode}, status: {exitStatus}")
 
     def startDOPfp(self):  
@@ -1032,7 +1012,7 @@ class MRSLab(object):
         
 
     def startPRVI(self):  
-        self.dlg.terminal.append('->> Calculating PRVI...')
+        self.dlg.terminal.append('(polsartools) $ Calculating PRVI...')
         worker = PRVI(self.inFolder,self.T3_stack,self.ws)
 
         # start the worker in a new thread
@@ -1054,7 +1034,7 @@ class MRSLab(object):
 
     def startiSOmega(self):   
         
-        self.dlg.terminal.append('->> Calculating iS-Omega powers...')
+        self.dlg.terminal.append('(polsartools) $ Calculating iS-Omega powers...')
         tau = self.dlg.cp_cb_tau.currentIndex()
             
         worker = iS_Omega(self.inFolder,self.C2_stack,self.ws,tau,self.psi_val,self.chi_val)
@@ -1077,7 +1057,7 @@ class MRSLab(object):
         # worker.
 
     def startCPRVI(self):        
-        self.dlg.terminal.append('->> Calculating CpRVI...')
+        self.dlg.terminal.append('(polsartools) $ Calculating CpRVI...')
         tau = self.dlg.cp_cb_tau.currentIndex()
             
         worker = CpRVI(self.inFolder,self.C2_stack,self.ws,tau)
@@ -1101,7 +1081,7 @@ class MRSLab(object):
 
 
     def startDOPCP(self):        
-        self.dlg.terminal.append('->> Calculating DOP...')
+        self.dlg.terminal.append('(polsartools) $ Calculating DOP...')
         tau = self.dlg.cp_cb_tau.currentIndex()
             
         worker = dop_cp(self.inFolder,self.C2_stack,self.ws,tau)
@@ -1125,7 +1105,7 @@ class MRSLab(object):
         
     def startNM3CC(self):
         
-        self.dlg.terminal.append('->> Calculating MF3CC...')
+        self.dlg.terminal.append('(polsartools) $ Calculating MF3CC...')
         tau = self.dlg.cp_cb_tau.currentIndex()
             
         worker = NM3CC(self.inFolder,self.C2_stack,self.ws,tau)
@@ -1149,7 +1129,7 @@ class MRSLab(object):
     
     def startMF4CF(self):
         
-        self.dlg.terminal.append('->> Calculating MF4CF...')
+        self.dlg.terminal.append('(polsartools) $ Calculating MF4CF...')
         tau = self.dlg.cp_cb_tau.currentIndex()
             
         worker = MF4CF(self.inFolder,self.T3_stack,self.ws)
@@ -1173,7 +1153,7 @@ class MRSLab(object):
         
     def startDpRVI(self):
         
-        self.dlg.terminal.append('->> Calculating DpRVI... ')
+        self.dlg.terminal.append('(polsartools) $ Calculating DpRVI... ')
         worker = DpRVI(self.inFolder,self.C2_stack,self.ws)
 
         # start the worker in a new thread
@@ -1195,7 +1175,7 @@ class MRSLab(object):
 
     def startRVIdp(self):
         
-        self.dlg.terminal.append('->> Calculating RVI... ')
+        self.dlg.terminal.append('(polsartools) $ Calculating RVI... ')
         worker = RVIdp(self.inFolder,self.C2_stack,self.ws)
 
         # start the worker in a new thread
@@ -1217,7 +1197,7 @@ class MRSLab(object):
             
     def startNM3CF(self):
         
-        self.dlg.terminal.append('->> Calculating MF3CF...')
+        self.dlg.terminal.append('(polsartools) $ Calculating MF3CF...')
         worker = NM3CF(self.inFolder,self.T3_stack,self.ws)
 
         # start the worker in a new thread
@@ -1239,7 +1219,7 @@ class MRSLab(object):
 
     def startRVIFP(self):
         
-        self.dlg.terminal.append('->> Calculating RVI...')
+        self.dlg.terminal.append('(polsartools) $ Calculating RVI...')
         worker = RVI_FP(self.inFolder,self.T3_stack,self.ws)
 
         # start the worker in a new thread
@@ -1261,7 +1241,7 @@ class MRSLab(object):
         
     def startGRVI(self):
         
-        self.dlg.terminal.append('->> Calculating GRVI...')
+        self.dlg.terminal.append('(polsartools) $ Calculating GRVI...')
         
         self.__threads = []
         worker = GRVI(self.inFolder,self.T3_stack,self.ws)
@@ -1301,7 +1281,7 @@ class MRSLab(object):
         # worker.kill
     def cancel_fn(self):
         # self.sig_abort_workers.emit()
-        self.dlg.terminal.append('->> cancelling...')
+        self.dlg.terminal.append('(polsartools) $ cancelling...')
         for thread, worker in self.__threads:  # note nice unpacking by Python, avoids indexing
             thread.quit()  # this will quit **as soon as thread event loop unblocks**
             thread.wait()  # <- so you need to wait for it to *actually* quit
@@ -1317,7 +1297,7 @@ class MRSLab(object):
 
         # if finish_cond:
         logger = self.dlg.terminal
-        logger.append('->> Process completed with ' +str(self.ws)+' x ' +str(self.ws)+' window ')
+        logger.append('(polsartools) $ Process completed with ' +str(self.ws)+' x ' +str(self.ws)+' window ')
         # clean up the worker and thread
     
         # self.viewData() # Load data into QGIS
@@ -1336,12 +1316,12 @@ class MRSLab(object):
 
         if finish_cond == 0:
             # self.worke
-            logger.append('->> Process stopped in between ! You are good to go again.')
+            logger.append('(polsartools) $ Process stopped in between ! You are good to go again.')
             pB.setValue(0)
 
     def workerError(self, e, exception_string):
         logger = self.dlg.terminal
-        logger.append('->> :-( Error:\n\n %s' %str(exception_string))
+        logger.append('(polsartools) $ :-( Error:\n\n %s' %str(exception_string))
     
 class UserAbortedNotification(Exception):
     pass 
