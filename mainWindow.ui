@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>D:/OneDrive - iitb.ac.in/MRSLab/icon.png</normaloff>D:/OneDrive - iitb.ac.in/MRSLab/icon.png</iconset>
+    <normaloff>icon.png</normaloff>icon.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
