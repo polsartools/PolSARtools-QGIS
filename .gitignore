@@ -2,3 +2,4 @@
 '/functions/cp/__pycache__/*.pyc'
 '/functions/dp/__pycache__/*.pyc'
 '/functions/dcop/__pycache__/*.pyc'
+'/functions/utils/__pycache__/*.pyc'

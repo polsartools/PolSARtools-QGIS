@@ -934,14 +934,25 @@ class MRSLab(object):
             # substitute with your code.
             pass
         
+    # def Startup(self):
+    #     # For terminal outputs
+    #     logger = self.dlg.terminal
+    #     logger.append('\t                       Welcome to PolSAR tools.'+
+    #                   '\n\t This plugin generates derived SAR parameters')
+    #     logger.append('\t     SAR indices | Decomposition parameters')        
+    #     logger.append('---------------------------------------------------------------------------------------------')
+    #     logger.append('Note: Start by selecting a parameter from "select parameter" dropdown\n')
+        
     def Startup(self):
         # For terminal outputs
         logger = self.dlg.terminal
-        logger.append('\t                       Welcome to PolSAR tools.'+
-                      '\n\t This plugin generates derived SAR parameters')
-        logger.append('\t     SAR indices | Decomposition parameters')        
-        logger.append('---------------------------------------------------------------------------------------------')
-        logger.append('Note: Start by selecting a parameter from "select parameter" dropdown\n')
+        logger.append("\n\t                  Welcome to PolSAR tools!")
+        logger.append("\t================================\n")
+        logger.append("\t This plugin generates Polarimetric SAR parameters.")
+        logger.append("\t   🔹 SAR Indices       🔹 Decomposition Parameters\n")
+        logger.append("\t-----------------------------------------------------------------\n\n")
+        logger.append('Tip: Start by selecting a parameter from the "Select Parameter" dropdown menu.\n')
+
         """ Process button calls"""
 
     def startPRVIdp(self):
@@ -993,8 +1004,8 @@ class MRSLab(object):
         output = self.process.readAllStandardOutput().data().decode()
         lines = output.splitlines()
         for line in lines:
-            self.dlg.terminal.append(line.strip())
-            match = re.search(r' \[PROGRESS\](\d+)', line)
+            self.dlg.terminal.append(line.strip())                
+            match = re.search(r'progress: (\d+)', line)    
             if match:
                 percent = int(match.group(1))
                 self.pBarupdate(percent)
@@ -1007,7 +1018,7 @@ class MRSLab(object):
         print(f"Process finished with exit code: {exitCode}, status: {exitStatus}")
 
     def startDOPfp(self):  
-        self.dlg.terminal.append('->> Calculating DOP pst...')
+        self.dlg.terminal.append('(polsartools) $ Calculating DOP FP pst...')
         self.process = QProcess()
         self.process.setProgram("python")  
         
