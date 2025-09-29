@@ -1,6 +1,8 @@
-PolSAR tools
-======================================
-### A python based [QGIS](https://qgis.org/en/site/index.html) plugin
+<p align="center">
+  <img src="logo.png" alt=""/>
+</p>
+
+### A [QGIS](https://qgis.org/en/site/index.html) plugin for processing Polarimetric Synthetic Aperture Radar (PolSAR) data.
 [![DOI](https://zenodo.org/badge/238603440.svg)](https://zenodo.org/badge/latestdoi/238603440)
 [![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-green.svg)](https://opensource.org/licenses/gpl-license)
@@ -130,23 +132,24 @@ It is possible that the plugin may show not responding for larger datasets but p
   <p align="center"> <em>Imported data in QGIS</em> </p>
 </p>
 
-## Functions description
 
-Description and the details of all the core functions of this plugin are available here: [Functions_description](help/Functions_description.md)
-
-## Contributions
-1) Contribute to the software
-
-    [Contribution guidelines for this project](help/CONTRIBUTING.md)
+> **Cite:** Bhogapurapu, N., Dey, S., Mandal, D., Bhattacharya, A. and Rao, Y.S., 2021. PolSAR tools: A QGIS plugin for generating SAR descriptors. Journal of Open Source Software, 6(60), p.2970. doi:  [10.21105/joss.02970](https://doi.org/10.21105/joss.02970)  
 
 
-2) Report issues or problems with the software
-	
-	Please raise your issues here : <https://github.com/Narayana-Rao/SAR-tools/issues>
+```bibtex
+@article{bhogapurapu2021polsar,
+  title={PolSAR tools: A QGIS plugin for generating SAR descriptors},
+  author={Bhogapurapu, Narayanarao and Dey, Subhadip and Mandal, Dipankar and Bhattacharya, Avik and Rao, YS},
+  journal={Journal of Open Source Software},
+  volume={6},
+  number={60},
+  pages={2970},
+  year={2021},
+  doi= {10.21105/joss.02970}
+}
 
-3) Seek support
+```
 
-	Please write to us: <bnarayanarao@iitb.ac.in> 
 
 ## References
 -------------
