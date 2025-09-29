@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>472</width>
-    <height>666</height>
+    <width>482</width>
+    <height>686</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>D:/OneDrive - iitb.ac.in/MRSLab/icon.png</normaloff>D:/OneDrive - iitb.ac.in/MRSLab/icon.png</iconset>
+    <normaloff>icon.png</normaloff>icon.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -56,7 +56,7 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="movable">
         <bool>true</bool>
@@ -748,7 +748,7 @@ DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, 
             <bool>false</bool>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0.3125, x2:0.754746, y2:0.334, stop:0.288136 rgba(0, 255, 0, 0), stop:1 rgba(0, 245, 0, 255));</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>Process</string>

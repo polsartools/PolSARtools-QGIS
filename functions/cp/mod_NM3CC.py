@@ -49,9 +49,9 @@ class NM3CC(QtCore.QObject):
             def NM3CC_fn(C2_stack,ws):
 
                 if self.tau==0:                    
-                    chi_in = 45.0
-                else:
                     chi_in = -45.0
+                else:
+                    chi_in = 45.0
 
                 kernel = np.ones((ws,ws),np.float32)/(ws*ws)
                 c11_T1 = C2_stack[:,:,0]

@@ -2,39 +2,18 @@
   <img src="logo.png" alt=""/>
 </p>
 
-### A python based [QGIS](https://qgis.org/en/site/index.html) plugin 
-[![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
+### A [QGIS](https://qgis.org/en/site/index.html) plugin for processing Polarimetric Synthetic Aperture Radar (PolSAR) data.
+[![DOI](https://zenodo.org/badge/238603440.svg)](https://zenodo.org/badge/latestdoi/238603440)
 [![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-green.svg)](https://opensource.org/licenses/gpl-license)
+[![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FNarayana-Rao%2FPolSAR-tools&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![DOI](https://zenodo.org/badge/238603440.svg)](https://zenodo.org/badge/latestdoi/238603440)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-ffd040.svg)](https://www.python.org/)
 [![GitHub release](https://img.shields.io/github/release/Narayana-Rao/PolSAR-tools.svg)](https://github.com/Narayana-Rao/PolSAR-tools/releases)
-[![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.7.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
+[![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.6.3.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/graphs/commit-activity)
 [![Website http://www.mrslab.in/qgisplugin/](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://www.mrslab.in/qgisplugin/)
-<p align="center">
-<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/Narayana-Rao/PolSAR-tools&count_bg=%2379C83D&title_bg=%23555555&icon=go.svg&icon_color=%2300ADD8&title=hits&edge_flat=false"/></a>
-</p>
-
-> **Cite:** Bhogapurapu, N., Dey, S., Mandal, D., Bhattacharya, A. and Rao, Y.S., 2021. PolSAR tools: A QGIS plugin for generating SAR descriptors. Journal of Open Source Software, 6(60), p.2970. doi:  [10.21105/joss.02970](https://doi.org/10.21105/joss.02970)  
-
-
-```bibtex
-@article{bhogapurapu2021polsar,
-  title={PolSAR tools: A QGIS plugin for generating SAR descriptors},
-  author={Bhogapurapu, Narayanarao and Dey, Subhadip and Mandal, Dipankar and Bhattacharya, Avik and Rao, YS},
-  journal={Journal of Open Source Software},
-  volume={6},
-  number={60},
-  pages={2970},
-  year={2021},
-  doi= {10.21105/joss.02970}
-}
-
-```
-
-
 ## General Information
 -------------------
 This plugin generates derived SAR parameters (viz. vegetation indices, polarimetric decomposition parameters) from input polarimetric matrix (C3, T3, C2, T2). The input data needs to be in [PolSARpro](https://earth.esa.int/web/polsarpro/home)/[ENVI](https://www.l3harrisgeospatial.com/Software-Technology/ENVI) format (\*.bin and \*.hdr). It requires [numpy](https://numpy.org/), [matplotlib](https://matplotlib.org/) python libraries pre-installed.
@@ -82,7 +61,6 @@ Additional ``reset`` button to clear the environment, ``view data`` button to im
 ## Available functionalities:
 -----------------------------
   * Full-pol :
-    * Model free 4-Component decomposition for full-pol data (MF4CF)[[11]](#11)
     * Model free 3-Component decomposition for full-pol data (MF3CF)[[4]](#4)
 	* Radar Vegetation Index (RVI) [[8]](#8) 
     * Generalized volume Radar Vegetation Index (GRVI) [[2]](#2)
@@ -91,8 +69,8 @@ Additional ``reset`` button to clear the environment, ``view data`` button to im
 
   * Compact-pol : 
     * Model free 3-Component decomposition for compact-pol data (MF3CC) [[4]](#4)
-    * Improved S-Omega decomposition for compact-pol data (iS-Omega) [[7]](#7)
-    * Compact-pol Radar Vegetation Index (CpRVI)  [[6]](#6)
+    * Improved S-Omega decomposition for compact-pol data (iS-Omega) [[1]](#1)
+    * Compact-pol Radar Vegetation Index (CpRVI)  [[7]](#7)
     * Degree of Polarization (DOP)  [[10]](#10) 
 
   * Dual-pol:
@@ -154,25 +132,24 @@ It is possible that the plugin may show not responding for larger datasets but p
   <p align="center"> <em>Imported data in QGIS</em> </p>
 </p>
 
-## Functions description
 
-Description and the details of all the core functions of this plugin are available here: [Functions_description](help/Functions_description.md)
-
+> **Cite:** Bhogapurapu, N., Dey, S., Mandal, D., Bhattacharya, A. and Rao, Y.S., 2021. PolSAR tools: A QGIS plugin for generating SAR descriptors. Journal of Open Source Software, 6(60), p.2970. doi:  [10.21105/joss.02970](https://doi.org/10.21105/joss.02970)  
 
 
-## Contributions
-1) Contribute to the software
+```bibtex
+@article{bhogapurapu2021polsar,
+  title={PolSAR tools: A QGIS plugin for generating SAR descriptors},
+  author={Bhogapurapu, Narayanarao and Dey, Subhadip and Mandal, Dipankar and Bhattacharya, Avik and Rao, YS},
+  journal={Journal of Open Source Software},
+  volume={6},
+  number={60},
+  pages={2970},
+  year={2021},
+  doi= {10.21105/joss.02970}
+}
 
-    [Contribution guidelines for this project](help/CONTRIBUTING.md)
+```
 
-
-2) Report issues or problems with the software
-	
-	Please raise your issues here : <https://github.com/Narayana-Rao/SAR-tools/issues>
-
-3) Seek support
-
-	Please write to us: <bnarayanarao@iitb.ac.in> 
 
 ## References
 -------------
@@ -205,5 +182,3 @@ Trudel, M., Charbonneau, F. and Leconte, R., 2012. Using RADARSAT-2 polarimetric
 
 <a id="10">[10]</a> 
 Barakat, R., 1977. Degree of polarization and the principal idempotents of the coherency matrix. Optics Communications, 23(2), pp.147-150.
-
-<a id="11">[11]</a> S. Dey, A. Bhattacharya, A. C. Frery, C. Lopez-Martinez and Y. S. Rao, "A Model-free Four Component Scattering Power Decomposition for Polarimetric SAR Data," in IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing, 2021. doi: [10.1109/JSTARS.2021.3069299](https://doi.org/10.1109/JSTARS.2021.3069299). 

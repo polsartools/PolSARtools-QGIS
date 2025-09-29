@@ -1,12 +1,3 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 help/* linguist-documentation
-*.html linguist-detectable=false
-*.js linguist-detectable=false
-*.css linguist-detectable=false
-*.rst linguist-detectable=false
-*.sh linguist-detectable=false
-*.bat linguist-detectable=false
-*.bib linguist-detectable=false
-/Makefile linguist-vendored=false
-help/Makefile linguist-vendored=false

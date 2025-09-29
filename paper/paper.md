@@ -32,31 +32,30 @@ bibliography: paper.bib
 
 # Statement of need
 
-The demand for processing tools increases with the increasing number of ***Synthetic Aperture Radar (SAR)*** satellite missions and datasets. However, to process SAR data, a minimal number of free tools are available ([PolSARpro](https://earth.esa.int/web/polsarpro/home), [SNAP](https://step.esa.int/main/toolboxes/snap/)) that consolidate all necessary pre-processing steps. Bearing this in mind, there is a need to develop specific tools for the remote sensing user community to derive polarimetric descriptors like vegetation indices and decomposition parameters. Besides, to the best of our knowledge, there are no such free tools available on a GIS platform, which is often necessary for the processing of SAR remote sensing datasets. 
+The demand for processing tools increases with the increasing number of ***Synthetic Aperture Radar (SAR)*** satellite missions and datasets. However, to process SAR data, a minimal number of free tools are available ([PolSARpro](https://earth.esa.int/web/polsarpro/home), [SNAP](https://step.esa.int/main/toolboxes/snap/)), which consolidates all necessary pre-processing steps. Bearing this in mind, there is a need to develop specific tools for the remote sensing user community to derive polarimetric descriptors like the vegetation indices and decomposition parameters. Besides, to the best of our knowledge, there are no such free tools available on the GIS platform, which are quite necessary for SAR remote sensing. 
 
-Hence we have developed a plugin for ```QGIS``` that supports data for the three available polarimetric modes (i.e., full-, compact, and dual). The ```PolSAR tools``` plugin generates polarimetric descriptors (viz., vegetation indices, polarimetric decomposition parameters) from the 3x3 (C3/T3) or the 2x2 (C2/T2) covariance (coherency) matrices obtained from the ESA's [PolSARpro](https://earth.esa.int/web/polsarpro/home) software. The input data needs to be in PolSARpro format (```*.bin``` and ```*.hdr```). The plugin is coded in Python and is dependant on the QGIS framework. It uses the following Python libraries (bundled with QGIS): [numpy](https://numpy.org/), and [gdal](https://gdal.org/).
+Hence we have developed a plugin for ```QGIS``` that supports data for the three available polarimetric modes (i.e., full-, compact, and dual). The ```PolSAR tools``` plugin generates polarimetric descriptors (viz., vegetation indices, polarimetric decomposition parameters) from the 3x3 (C3/T3) or the 2x2 (C2/T2) covariance (coherency) matrices obtained from the ESA's [PolSARpro](https://earth.esa.int/web/polsarpro/home) software. The input data needs to be in PolSARpro format (```*.bin``` and ```*.hdr```). The plugin is coded in Python and is dependant on the Quantum GIS framework. It uses the following libraries (bundled with Quantum GIS): [numpy](https://numpy.org/), [gdal](https://gdal.org/) and [QGIS](https://qgis.org/en/site/index.html) core library.
 
 # Background
-Conventional model-based decomposition methods utilize diverse scattering models and typical hierarchical rule to enumerate power components leading to numerous limitations. The ***polarimetric decomposition techniques*** incorporated in this QGIS plugin are model-free, i.e., no prior scattering models are assumed to compute the powers. The proposed decomposition techniques utilize certain novel roll-invariant target characterization parameters to decompose the total power into even bounce, odd bounce, and diffused power components. It is guaranteed that the proposed technique's powers are non-negative, which is seldom true with the existing methodologies.
+Conventional model-based decomposition methods utilize diverse scattering models and typical hierarchical rule to enumerate power components leading to numerous limitations. The ***polarimetric decomposition techniques*** incorporated in this ```QGIS``` plugin are model-free, i.e., no prior scattering models are assumed to compute the powers. The proposed decomposition techniques utilize certain novel roll-invariant target characterization parameters to decompose the total power into even bounce, odd bounce, and diffused power components. It is guaranteed that the proposed technique's powers are non-negative, which is seldom true with the existing methodologies.
 
-In terms of target descriptors, we often use ***vegetation indices*** as plant growth proxies. While appreciating the potential of vegetation indices derived from optical remote sensing sensors, regional to global products have been supported for operational uses. These days, the Earth Observation (EO) community relies on SAR imaging technology due to its all-weather imaging capability among its numerous advantages. The SAR images are presently processed by several downstream users and are more frequently interpreted by non-radar specialists. This paradigm shift allows the utility of radar-derived vegetation indices towards a quintessential goal of Analysis Ready Data (ARD) products.
+In terms of target descriptors, we often use ***vegetation indices*** as plant growth proxies. While appreciating the potential of vegetation indices derived from optical remote sensing sensors, regional to global products have been supported for operational uses. These days, the ```Earth Observation (EO) community``` relies on SAR imaging technology due to its all-weather imaging capability among its numerous advantages. The SAR images are presently processed by several downstream users and are more frequently interpreted by non-radar specialists. This paradigm shift allows the utility of radar-derived vegetation indices towards a quintessential goal of ```Analysis Ready Data (ARD)``` products.
 
 Recently, we proposed three vegetation indices: ```GRVI``` (Generalized Radar Vegetation Index) [@ratha2019generalized], ```CpRVI``` (Compact-pol Radar Vegetation Index) [@mandal2020radar], and Dual-pol Radar Vegetation Index (```DpRVI```) [@mandal2020dual] for distinct acquisition modes. These vegetation indices have provided a better opportunity to estimate biophysical parameters with fitted models directly. The retrieval of biophysical parameters from SAR observations is of vital importance for in-season monitoring of crop growth.
 
 # PolSAR tools Audience
-```PolSAR tools``` are intended for students, researchers, and polarimetry experts to derive different SAR descriptors, utilizing the QGIS and Python ecosystem of diverse tools. Especially for non-domain and application users, the plugin interface provides an easy way to process the pre-processed ***polarimetric SAR data***. 
+***PolSAR tools*** are intended for students, researchers, and polarimetry experts to derive different SAR descriptors, utilizing the ```QGIS``` and ```python``` ecosystem of diverse tools. Especially for non-domain and application users, the plugin interface provides an easy way to process the pre-processed ***polarimetric SAR data***. 
 
 
 # PolSAR tools Functionality
 
-The functionalities of the ```PolSAR tools``` are organized into three modules to handle the data from three different SAR polarization modes. The following is the list of the available functions in the ```PolSAR tools```:
+The functionalities of ```PolSAR tools``` are organized into three modules to handle the data from three different SAR polarization modes. The following is the list of the available functions in the ```PolSAR tools```:
 
 * Full-pol : 
     * Radar Vegetation Index (RVI) [@Kim_2009]
     * Generalized volume Radar Vegetation Index (GRVI) [@ratha2019generalized]
     * Polarimetric Radar Vegetation Index (PRVI) [@chang2018polarimetric] 
     * Model free 3-Component decomposition for full-pol data (MF3CF) [@dey2020target]
-    * Model free 4-Component decomposition for full-pol data (MF4CF) [@dey2021mf4cf]
     * Degree of Polarization (DOP) [@barakat1977degree]
 * Compact-pol :
     * Model free 3-Component decomposition for compact-pol data (MF3CC) [@dey2020target]
@@ -70,6 +69,6 @@ The functionalities of the ```PolSAR tools``` are organized into three modules t
     * Degree of Polarization (DOP) [@barakat1977degree]
 
 # Acknowledgements
-The authors would like to thank the developers of [QGIS Plugin Builder](https://github.com/g-sherman/Qgis-Plugin-Builder). Authors acknowledge the [GEO-AWS Earth Observation Cloud Credits Program](https://www.earthobservations.org/aws.php), which supported the computation, development, and testing of ```PolSAR tools``` on AWS cloud platform through the project: *AWS4AgriSAR-Crop inventory mapping from SAR data on cloud computing platform*.
+The authors would like to thank the developers of [QGIS Plugin Builder](https://github.com/g-sherman/Qgis-Plugin-Builder). Authors acknowledge the [GEO-AWS Earth Observation Cloud Credits Program](https://www.earthobservations.org/aws.php), which supported the computation, development, and testing of ```PolSAR tools``` on AWS cloud platform through the project: ```AWS4AgriSAR-Crop inventory mapping from SAR data on cloud computing platform.```
 	
 # References
