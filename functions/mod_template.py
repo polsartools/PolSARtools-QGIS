@@ -12,7 +12,7 @@ import multiprocessing
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
-from .SAR_Tools_dialog import MRSLabDialog
+from .SAR_Tools_dialog import PST_Dialog
 import os.path
 from osgeo import gdal
 import time

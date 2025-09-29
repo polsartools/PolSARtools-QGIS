@@ -7,7 +7,7 @@ This plugin generates derived SAR parameters from input polarimetric matrix (C3,
                               -------------------
         begin                : 2020-02-03
         git sha              : $Format:%H$
-        copyright            : (C) 2020 by MRSLab
+        copyright            : (C) 2020 by PolSAR tools team
         email                : bnarayanarao@iitb.ac.in
  ***************************************************************************/
 
@@ -35,7 +35,7 @@ import webbrowser
 
 from .resources import *
 # Import the code for the dialog
-from .SAR_Tools_dialog import MRSLabDialog
+from .SAR_Tools_dialog import PST_Dialog
 import os.path
 import sys
 # import os
@@ -44,41 +44,14 @@ import polsartools as pst
 import re
 from osgeo import gdal
 import time
-try:
-    from PyQt6 import QtCore, QtGui, QtWidgets
-    from PyQt6.QtCore import Qt
-    PYQT_VERSION = 6
-except ImportError:
-    from PyQt5 import QtCore, QtGui, QtWidgets
-    from PyQt5.QtCore import Qt
-    PYQT_VERSION = 5
+
+from .qt_compat import (
+    QtCore, QtGui, QtWidgets, Qt,
+    DialogExec, MessageIcon, MessageButton,
+    AlignmentFlag, Key, PYQT_VERSION
+)
 
 
-from .qt_compat import DialogExec
-from .qt_compat import MessageIcon, MessageButton
-
-
-# import QtCore
-#################
-
-
-from .functions.dp.mod_DpRVI import DpRVI
-from .functions.dp.mod_PRVI_dp import PRVI_dp
-from .functions.dp.mod_dop_dp import dop_dp
-from .functions.dp.mod_RVI_dp import RVIdp
-
-# from .functions.fp.mod_NM3CF import NM3CF
-# from .functions.fp.mod_MF4CF import MF4CF
-# from .functions.fp.mod_GRVI import GRVI
-# from .functions.fp.mod_PRVI import PRVI
-# from .functions.fp.mod_dop_fp import dop_FP
-# from .functions.fp.mod_RVIFP import RVI_FP
-
-from .functions.cp.mod_dop_cp import dop_cp
-from .functions.cp.mod_CpRVI import CpRVI
-from .functions.cp.mod_iS_Omega import iS_Omega
-from .functions.cp.mod_NM3CC import NM3CC
-#############################
 
 # Create a lock for multiprocess
 p_lock = multiprocessing.Lock()
@@ -86,7 +59,7 @@ p_lock = multiprocessing.Lock()
 ############################################################################################################################################
 ############################################################################################################################################
 
-class MRSLab(object):
+class PolSAR(object):
     """QGIS Plugin Implementation."""
     sig_abort_workers = pyqtSignal()
     def __init__(self, iface):
@@ -108,14 +81,14 @@ class MRSLab(object):
         locale_path = os.path.join(
             self.plugin_dir,
             'i18n',
-            'MRSLab_{}.qm'.format(locale))
+            'PolSAR_{}.qm'.format(locale))
 
         if os.path.exists(locale_path):
             self.translator = QTranslator()
             self.translator.load(locale_path)
             QCoreApplication.installTranslator(self.translator)
 
-        self.dlg = MRSLabDialog()
+        self.dlg = PST_Dialog()
 
         # Declare instance attributes
         self.actions = []
@@ -187,7 +160,7 @@ class MRSLab(object):
         :rtype: QString
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
-        return QCoreApplication.translate('MRSLab', message)
+        return QCoreApplication.translate('PolSAR', message)
 
 
     def add_action(
@@ -452,7 +425,7 @@ class MRSLab(object):
             if indX==4:
                 try:
                     logger.append('(polsartools) $ --------------------')
-                    self.startiSOmega()
+                    self.startmiSOmega()
                 except:
                     self.dtype_error()
 
@@ -928,7 +901,7 @@ class MRSLab(object):
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start == True:
             self.first_start = False
-            self.dlg = MRSLabDialog()
+            self.dlg = PST_Dialog()
         
         self.dlg.show()
         # Run the dialog event loop
@@ -968,50 +941,79 @@ class MRSLab(object):
 
         """ Process button calls"""
 
+    # def startPRVIdp(self):
+        
+    #     self.dlg.terminal.append('(polsartools) $ Calculating PRVI... ')
+    #     worker = PRVI_dp(self.inFolder,self.C2_stack,self.ws)
+
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
+
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
+        
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.kill
+
     def startPRVIdp(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating PRVIdp pst...')
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.dlg.terminal.append('(polsartools) $ Calculating PRVI... ')
-        worker = PRVI_dp(self.inFolder,self.C2_stack,self.ws)
+        script_path = os.path.join(os.path.dirname(__file__), "functions/dp/run_prvidp.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
 
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
 
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+    # def startDOPdp(self):
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.kill
+    #     self.dlg.terminal.append('(polsartools) $ Calculating DOP... ')
+    #     worker = dop_dp(self.inFolder,self.C2_stack,self.ws)
+
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
+
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
+        
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.kill
 
     def startDOPdp(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating DOP pst...')
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.dlg.terminal.append('(polsartools) $ Calculating DOP... ')
-        worker = dop_dp(self.inFolder,self.C2_stack,self.ws)
+        script_path = os.path.join(os.path.dirname(__file__), "functions/dp/run_dop_dp.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
 
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
 
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
-        
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.kill
-    
+
 
     def handle_stdout(self):
         output = self.process.readAllStandardOutput().data().decode()
@@ -1060,101 +1062,160 @@ class MRSLab(object):
         self.process.finished.connect(self.handle_finished)
         self.process.start()
 
-    def startiSOmega(self):   
+    # def startiSOmega(self):   
         
-        self.dlg.terminal.append('(polsartools) $ Calculating iS-Omega powers...')
-        tau = self.dlg.cp_cb_tau.currentIndex()
+    #     self.dlg.terminal.append('(polsartools) $ Calculating iS-Omega powers...')
+    #     tau = self.dlg.cp_cb_tau.currentIndex()
             
-        worker = iS_Omega(self.inFolder,self.C2_stack,self.ws,tau,self.psi_val,self.chi_val)
+    #     worker = iS_Omega(self.inFolder,self.C2_stack,self.ws,tau,self.psi_val,self.chi_val)
 
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
 
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.
-
-    def startCPRVI(self):        
-        self.dlg.terminal.append('(polsartools) $ Calculating CpRVI...')
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.
+    def startmiSOmega(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating startmiSOmega pst...')
         tau = self.dlg.cp_cb_tau.currentIndex()
-            
-        worker = CpRVI(self.inFolder,self.C2_stack,self.ws,tau)
-
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
-
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.
+        script_path = os.path.join(os.path.dirname(__file__), "functions/cp/run_misomega.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws), str(tau)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
 
 
-    def startDOPCP(self):        
-        self.dlg.terminal.append('(polsartools) $ Calculating DOP...')
+
+    # def startCPRVI(self):        
+    #     self.dlg.terminal.append('(polsartools) $ Calculating CpRVI...')
+    #     tau = self.dlg.cp_cb_tau.currentIndex()
+            
+    #     worker = CpRVI(self.inFolder,self.C2_stack,self.ws,tau)
+
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
+
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
+        
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.
+
+    def startCPRVI(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating startCPRVI pst...')
         tau = self.dlg.cp_cb_tau.currentIndex()
+        self.process = QProcess()
+        self.process.setProgram("python")  
+        
+        script_path = os.path.join(os.path.dirname(__file__), "functions/cp/run_cprvi.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws), str(tau)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
+
+
+    # def startDOPCP(self):        
+    #     self.dlg.terminal.append('(polsartools) $ Calculating DOP...')
+    #     tau = self.dlg.cp_cb_tau.currentIndex()
             
-        worker = dop_cp(self.inFolder,self.C2_stack,self.ws,tau)
+    #     worker = dop_cp(self.inFolder,self.C2_stack,self.ws,tau)
 
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
 
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.
+
+    def startDOPCP(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating DOPCP pst...')
+        tau = self.dlg.cp_cb_tau.currentIndex()
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
+        script_path = os.path.join(os.path.dirname(__file__), "functions/cp/run_dop_cp.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws), str(tau)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
+
+        
+    # def startNM3CC(self):
+        
+    #     self.dlg.terminal.append('(polsartools) $ Calculating MF3CC...')
+    #     tau = self.dlg.cp_cb_tau.currentIndex()
+            
+    #     worker = NM3CC(self.inFolder,self.C2_stack,self.ws,tau)
+
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
+
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
+        
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.
+
     def startNM3CC(self):
-        
-        self.dlg.terminal.append('(polsartools) $ Calculating MF3CC...')
+        self.dlg.terminal.append('(polsartools) $ Calculating startNM3CC pst...')
         tau = self.dlg.cp_cb_tau.currentIndex()
-            
-        worker = NM3CC(self.inFolder,self.C2_stack,self.ws,tau)
-
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
-
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.
-    
+        script_path = os.path.join(os.path.dirname(__file__), "functions/cp/run_nm3cc.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws), str(tau)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
+
+
     def startMF4CF(self):
         
         self.dlg.terminal.append('(polsartools) $ Calculating NM4CF FP pst...')
@@ -1169,49 +1230,79 @@ class MRSLab(object):
         self.process.finished.connect(self.handle_finished)
         self.process.start()
         
+    # def startDpRVI(self):
+        
+    #     self.dlg.terminal.append('(polsartools) $ Calculating DpRVI... ')
+    #     worker = DpRVI(self.inFolder,self.C2_stack,self.ws)
+
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
+
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
+        
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.kill
+
     def startDpRVI(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating DpRVI pst...')
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.dlg.terminal.append('(polsartools) $ Calculating DpRVI... ')
-        worker = DpRVI(self.inFolder,self.C2_stack,self.ws)
+        script_path = os.path.join(os.path.dirname(__file__), "functions/dp/run_dprvi.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
 
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
 
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
+
+    # def startRVIdp(self):
         
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.kill
+    #     self.dlg.terminal.append('(polsartools) $ Calculating RVI... ')
+    #     worker = RVIdp(self.inFolder,self.C2_stack,self.ws)
+
+    #     # start the worker in a new thread
+    #     thread = QtCore.QThread()
+    #     worker.moveToThread(thread)
+    #     # self.workerFinished =1
+    #     worker.finished.connect(self.workerFinished)
+    #     worker.error.connect(self.workerError)
+
+    #     worker.progress.connect(self.showmsg)
+    #     worker.pBar.connect(self.pBarupdate)
+    #     thread.started.connect(worker.run)
+    #     thread.start()
+        
+    #     self.thread = thread
+    #     self.worker = worker
+    #     # time.sleep(0.1)
+    #     # worker.kill
 
     def startRVIdp(self):
+        self.dlg.terminal.append('(polsartools) $ Calculating RVI DP pst...')
+        self.process = QProcess()
+        self.process.setProgram("python")  
         
-        self.dlg.terminal.append('(polsartools) $ Calculating RVI... ')
-        worker = RVIdp(self.inFolder,self.C2_stack,self.ws)
+        script_path = os.path.join(os.path.dirname(__file__), "functions/dp/run_rvidp.py")
+        self.process.setArguments([script_path, self.inFolder, str(self.ws)])
+        # self.dlg.terminal.append(script_path)
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.handle_finished)
+        self.process.start()
 
-        # start the worker in a new thread
-        thread = QtCore.QThread()
-        worker.moveToThread(thread)
-        # self.workerFinished =1
-        worker.finished.connect(self.workerFinished)
-        worker.error.connect(self.workerError)
 
-        worker.progress.connect(self.showmsg)
-        worker.pBar.connect(self.pBarupdate)
-        thread.started.connect(worker.run)
-        thread.start()
-        
-        self.thread = thread
-        self.worker = worker
-        # time.sleep(0.1)
-        # worker.kill
             
     def startNM3CF(self):
         

@@ -10,6 +10,7 @@ version=0.7
 author=Narayanarao; Subhadip; Dipankar
 email=bnarayanarao@iitb.ac.in
 owners=bnarayanarao
+supportsQt6=True
 
 about=This plugin generates polarimetric descriptors (viz. vegetation indices, polarimetric decomposition parameters) from C3/T3/C2/T2 matrices obtained from PolSARpro. It requires numpy, scipy, matplotlib python libraries pre-installed.
 
