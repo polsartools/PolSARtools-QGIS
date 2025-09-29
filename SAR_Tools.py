@@ -44,7 +44,20 @@ import polsartools as pst
 import re
 from osgeo import gdal
 import time
-from PyQt5 import QtWidgets
+try:
+    from PyQt6 import QtCore, QtGui, QtWidgets
+    from PyQt6.QtCore import Qt
+    PYQT_VERSION = 6
+except ImportError:
+    from PyQt5 import QtCore, QtGui, QtWidgets
+    from PyQt5.QtCore import Qt
+    PYQT_VERSION = 5
+
+
+from .qt_compat import DialogExec
+from .qt_compat import MessageIcon, MessageButton
+
+
 # import QtCore
 #################
 
@@ -729,20 +742,35 @@ class MRSLab(object):
         self.dlg.progressBar.setValue(0)
         return T3_stack
     
-    def showTip(self):
-       msgBox = QMessageBox()
-       msgBox.setIcon(QMessageBox.Information)
-       msgBox.setText("Please select a valid matrix folder \
-                      \n generated from PolSARpro \
-                      \n file format: *.bin, *.hdr")
-       msgBox.setWindowTitle("Tip!")
-       msgBox.setStandardButtons(QMessageBox.Ok)
-       # msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-       # msgBox.buttonClicked.connect(msgButtonClick)
+    # def showTip(self):
+    #    msgBox = QMessageBox()
+    # #    msgBox.setIcon(QMessageBox.Information)
+    #    msgBox.setIcon(MessageIcon.Information)
+    #    msgBox.setText("Please select a valid matrix folder \
+    #                   \n generated from PolSARpro \
+    #                   \n file format: *.bin, *.hdr")
+    #    msgBox.setWindowTitle("Tip!")
+    #    msgBox.setStandardButtons(QMessageBox.Ok)
+    #    # msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    #    # msgBox.buttonClicked.connect(msgButtonClick)
     
-       returnValue = msgBox.exec()
-       # if returnValue == QMessageBox.Ok:
-          # print('OK clicked')
+    #    returnValue = msgBox.exec()
+    #    # if returnValue == QMessageBox.Ok:
+    def showTip(self):
+        msgBox = QMessageBox()
+        msgBox.setIcon(MessageIcon.Information)
+        msgBox.setText(
+            "Please select a valid matrix folder\n"
+            "generated from PolSARpro\n"
+            "file format: *.bin, *.hdr"
+        )
+        msgBox.setWindowTitle("Tip!")
+        msgBox.setStandardButtons(MessageButton.Ok)
+
+        returnValue = msgBox.exec()
+
+        # if returnValue == MessageButton.Ok:
+        #     print('OK clicked')    #       # print('OK clicked')
 
     def showError3(self):
        msgBox = QMessageBox()
@@ -904,7 +932,15 @@ class MRSLab(object):
         
         self.dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        # result = self.dlg.exec_()
+        # try:
+        #     result = self.dlg.exec_()
+        # except AttributeError:
+        #     result = self.dlg.exec()
+        
+        result = DialogExec(self.dlg)
+        
+        
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and

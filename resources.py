@@ -6,7 +6,16 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore
+# from PyQt5 import QtCore
+
+try:
+    from PyQt6 import QtCore, QtGui, QtWidgets
+    from PyQt6.QtCore import Qt
+    PYQT_VERSION = 6
+except ImportError:
+    from PyQt5 import QtCore, QtGui, QtWidgets
+    from PyQt5.QtCore import Qt
+    PYQT_VERSION = 5
 
 qt_resource_data = b"\
 \x00\x00\x05\xa5\

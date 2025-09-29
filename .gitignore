@@ -5,4 +5,4 @@
 /functions/utils/__pycache__/*.pyc
 /functions/__pycache__/*.pyc
 /sample_data/*/*/*.xml
-
+/__pycache__/*.pyc

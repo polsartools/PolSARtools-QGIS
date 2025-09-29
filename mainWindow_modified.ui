@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <ui version="4.0">
  <class>MRSLabDialogBase</class>
  <widget class="QDialog" name="MRSLabDialogBase">
@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>686</height>
+    <width>472</width>
+    <height>666</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -44,10 +44,10 @@
      <item row="0" column="0">
       <widget class="QTabWidget" name="tabWidget">
        <property name="toolTip">
-        <string/>
+        <string />
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true" />
        </property>
        <property name="tabPosition">
         <enum>QTabWidget::North</enum>
@@ -56,17 +56,17 @@
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="movable">
         <bool>true</bool>
        </property>
        <widget class="QWidget" name="fp_tab">
         <property name="toolTip">
-         <string/>
+         <string />
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true" />
         </property>
         <attribute name="title">
          <string>Full-pol</string>
@@ -78,7 +78,7 @@
             <string>Full polarimetric functions</string>
            </property>
            <property name="styleSheet">
-            <string notr="true"/>
+            <string notr="true" />
            </property>
            <property name="readOnly">
             <bool>true</bool>
@@ -116,7 +116,7 @@ MF4CF: Model Free 4-component Scattering Power Decomposition</string>
             </spacer>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+            <layout class="QHBoxLayout" name="horizontalLayout_4" />
            </item>
           </layout>
          </item>
@@ -251,7 +251,7 @@ MF4CF: Model Free 4-component Scattering Power Decomposition</string>
        </widget>
        <widget class="QWidget" name="cp_tab">
         <property name="toolTip">
-         <string/>
+         <string />
         </property>
         <attribute name="title">
          <string>Compact-pol</string>
@@ -407,7 +407,7 @@ MF4CF: Model Free 4-component Scattering Power Decomposition</string>
             </spacer>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_15"/>
+            <layout class="QHBoxLayout" name="horizontalLayout_15" />
            </item>
            <item>
             <widget class="QLabel" name="label_7">
@@ -482,7 +482,7 @@ iS-Omega: Improved S-Omega decomposition for compact-pol data</string>
        </widget>
        <widget class="QWidget" name="dp_tab">
         <property name="toolTip">
-         <string/>
+         <string />
         </property>
         <attribute name="title">
          <string>Dual-pol</string>
@@ -584,7 +584,7 @@ iS-Omega: Improved S-Omega decomposition for compact-pol data</string>
             </spacer>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_38"/>
+            <layout class="QHBoxLayout" name="horizontalLayout_38" />
            </item>
           </layout>
          </item>
@@ -748,7 +748,7 @@ DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, 
             <bool>false</bool>
            </property>
            <property name="styleSheet">
-            <string notr="true"/>
+            <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0.3125, x2:0.754746, y2:0.334, stop:0.288136 rgba(0, 255, 0, 0), stop:1 rgba(0, 245, 0, 255));</string>
            </property>
            <property name="text">
             <string>Process</string>
@@ -766,7 +766,7 @@ DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, 
        <item>
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;&amp;#169; Developed by &lt;a href=&quot;http://www.mrslab.in/&quot;&gt; MRSLab&lt;/a&gt;, IIT Bombay.                                                                         
+          <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;&amp;#169; Developed by &lt;a href="http://www.mrslab.in/"&gt; MRSLab&lt;/a&gt;, IIT Bombay.                                                                         
 &lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
@@ -783,6 +783,6 @@ DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, 
    </item>
   </layout>
  </widget>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>
