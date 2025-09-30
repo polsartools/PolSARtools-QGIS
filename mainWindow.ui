@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>686</height>
+    <width>517</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -41,51 +41,345 @@
      <property name="spacing">
       <number>7</number>
      </property>
-     <item row="0" column="0">
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="toolTip">
-        <string/>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="tabPosition">
-        <enum>QTabWidget::North</enum>
-       </property>
-       <property name="tabShape">
-        <enum>QTabWidget::Rounded</enum>
-       </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <property name="movable">
-        <bool>true</bool>
-       </property>
-       <widget class="QWidget" name="fp_tab">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <attribute name="title">
-         <string>Full-pol</string>
-        </attribute>
-        <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="0">
-          <widget class="QPlainTextEdit" name="plainTextEdit">
-           <property name="toolTip">
-            <string>Full polarimetric functions</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="plainText">
-            <string>**Note: Please select a valid matrix folder generated from PolSARpro.
+     <item row="1" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="tabPosition">
+          <enum>QTabWidget::North</enum>
+         </property>
+         <property name="tabShape">
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex">
+          <number>6</number>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="sensors">
+          <attribute name="title">
+           <string>sensors</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <item row="0" column="0">
+            <widget class="QScrollArea" name="scrollArea">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>461</width>
+                <height>291</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_11">
+               <item row="0" column="0">
+                <widget class="QPlainTextEdit" name="plainTextEdit_7">
+                 <property name="toolTip">
+                  <string>Dual polarimetric functions</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                 <property name="plainText">
+                  <string>
+rflee: Refined Lee speckle filter
 
+boxcar:
+
+convert_S:
+</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QGroupBox" name="groupBox">
+                 <property name="title">
+                  <string>Airborne</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_8">
+                  <item row="0" column="0">
+                   <widget class="QPushButton" name="pushButton">
+                    <property name="text">
+                     <string>UAVSAR</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="3">
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>166</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="pushButton_3">
+                    <property name="text">
+                     <string>ISRO ASAR</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="pushButton_8">
+                    <property name="text">
+                     <string>E-SAR</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QGroupBox" name="groupBox_2">
+                 <property name="title">
+                  <string>Spaceborne</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_10">
+                  <item row="0" column="3">
+                   <spacer name="horizontalSpacer_3">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="pushButton_6">
+                    <property name="text">
+                     <string>Chandrayaan-2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QPushButton" name="pushButton_5">
+                    <property name="text">
+                     <string>ALOS-2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QPushButton" name="pushButton_2">
+                    <property name="text">
+                     <string>NISAR</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="pushButton_4">
+                    <property name="text">
+                     <string>RISAT-1A</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="pushButton_7">
+                    <property name="text">
+                     <string>RADARSAT-2</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="preprocess">
+          <attribute name="title">
+           <string>preprocess</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEdit_4">
+             <property name="toolTip">
+              <string>Dual polarimetric functions</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="plainText">
+              <string>
+rflee: Refined Lee speckle filter
+
+boxcar:
+
+convert_S:
+</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Select parameter:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="fp_parm_2">
+               <property name="toolTip">
+                <string>Select the SAR descriptor</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>GRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF3CF</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>PRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DOP</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>RVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF4CF</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Window Size</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="fp_ws_2">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="singleStep">
+                <number>2</number>
+               </property>
+               <property name="value">
+                <number>7</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <widget class="QLineEdit" name="inFolder_fp_2">
+               <property name="toolTip">
+                <string>Select folder using '...' button</string>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+               <property name="clearButtonEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="fp_browse_2">
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Select the folder</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="fp_tab">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <attribute name="title">
+           <string>Full-pol</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEdit">
+             <property name="toolTip">
+              <string>Full polarimetric functions</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="plainText">
+              <string>
 GRVI: Generalized Radar Vegetation Index
 
 RVI: Radar Vegetation Index
@@ -97,377 +391,376 @@ PRVI: Polarimetric Radar Vegetation Index
 DOP: Degree of polarization for Full Polarimetric SAR Data
 
 MF4CF: Model Free 4-component Scattering Power Decomposition</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
-            <spacer name="horizontalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
+            </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4"/>
-           </item>
-          </layout>
-         </item>
-         <item row="4" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
-              <widget class="QLineEdit" name="inFolder_fp">
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+             </item>
+            </layout>
+           </item>
+           <item row="4" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QLineEdit" name="inFolder_fp">
+                 <property name="toolTip">
+                  <string>Select folder using '...' button</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="fp_browse">
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="toolTip">
-                <string>Select folder using '...' button</string>
+                <string>Select the folder</string>
                </property>
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="clearButtonEnabled">
-                <bool>true</bool>
+               <property name="text">
+                <string>...</string>
                </property>
               </widget>
              </item>
             </layout>
            </item>
-           <item>
-            <widget class="QPushButton" name="fp_browse">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string>Select the folder</string>
-             </property>
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Select parameter:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="fp_parm">
-             <property name="toolTip">
-              <string>Select the SAR descriptor</string>
-             </property>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
-              <property name="text">
-               <string>Select</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>GRVI</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>MF3CF</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>PRVI</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>DOP</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>RVI</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>MF4CF</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="label">
                <property name="text">
-                <string>Window Size</string>
+                <string>Select parameter:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="fp_ws">
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="singleStep">
-                <number>2</number>
-               </property>
-               <property name="value">
-                <number>7</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_9">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="cp_tab">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <attribute name="title">
-         <string>Compact-pol</string>
-        </attribute>
-        <layout class="QGridLayout" name="gridLayout_9">
-         <item row="1" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_18">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Select parameter:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cp_parm">
-             <property name="toolTip">
-              <string>Select the SAR descriptor</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>Select</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>MF3CC</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>DOP</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>CpRVI</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>iS-Omega</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_19">
-             <item>
-              <widget class="QLabel" name="label_6">
-               <property name="text">
-                <string>Window Size</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QSpinBox" name="cp_ws">
-               <property name="minimum">
-                <number>1</number>
-               </property>
-               <property name="singleStep">
-                <number>2</number>
-               </property>
-               <property name="value">
-                <number>7</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="cp_cb_tau">
-               <property name="currentIndex">
-                <number>0</number>
+              <widget class="QComboBox" name="fp_parm">
+               <property name="toolTip">
+                <string>Select the SAR descriptor</string>
                </property>
                <item>
                 <property name="text">
-                 <string>LC (+)</string>
+                 <string>Select</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>RC (-)</string>
+                 <string>GRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF3CF</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>PRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DOP</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>RVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF4CF</string>
                 </property>
                </item>
               </widget>
              </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Window Size</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="fp_ws">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>2</number>
+                 </property>
+                 <property name="value">
+                  <number>7</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </item>
-           <item>
-            <spacer name="horizontalSpacer_19">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
           </layout>
-         </item>
-         <item row="4" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_16">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_17">
+         </widget>
+         <widget class="QWidget" name="cp_tab">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <attribute name="title">
+           <string>Compact-pol</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_18">
              <item>
-              <widget class="QLineEdit" name="inFolder_cp">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Select parameter:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cp_parm">
                <property name="toolTip">
-                <string>Select folder using '...' button</string>
+                <string>Select the SAR descriptor</string>
                </property>
-               <property name="readOnly">
-                <bool>true</bool>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF3CC</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DOP</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>CpRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>iS-Omega</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <item>
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Window Size</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="cp_ws">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>2</number>
+                 </property>
+                 <property name="value">
+                  <number>7</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cp_cb_tau">
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>LC (+)</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>RC (-)</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_19">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
                </property>
-               <property name="clearButtonEnabled">
-                <bool>true</bool>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="4" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_16">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <item>
+                <widget class="QLineEdit" name="inFolder_cp">
+                 <property name="toolTip">
+                  <string>Select folder using '...' button</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="cp_browse">
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Select the folder</string>
+               </property>
+               <property name="text">
+                <string>...</string>
                </property>
               </widget>
              </item>
             </layout>
            </item>
-           <item>
-            <widget class="QPushButton" name="cp_browse">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string>Select the folder</string>
-             </property>
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <item>
+              <spacer name="horizontalSpacer_16">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_15"/>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;Ellipticity (&amp;chi;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="cp_sb_chi">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="maximum">
+                <double>45.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>45.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;Orientation (&amp;Psi;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="cp_sb_psi">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="maximum">
+                <double>180.000000000000000</double>
+               </property>
+               <property name="value">
+                <double>0.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
-          </layout>
-         </item>
-         <item row="2" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_14">
-           <item>
-            <spacer name="horizontalSpacer_16">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_15"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;Ellipticity (&amp;chi;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDoubleSpinBox" name="cp_sb_chi">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="maximum">
-              <double>45.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>45.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_5">
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEdit_2">
              <property name="enabled">
               <bool>true</bool>
              </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;Orientation (&amp;Psi;)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <property name="toolTip">
+              <string>Compact polarimetric functions</string>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QDoubleSpinBox" name="cp_sb_psi">
-             <property name="enabled">
-              <bool>false</bool>
+             <property name="readOnly">
+              <bool>true</bool>
              </property>
-             <property name="maximum">
-              <double>180.000000000000000</double>
-             </property>
-             <property name="value">
-              <double>0.000000000000000</double>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPlainTextEdit" name="plainTextEdit_2">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="toolTip">
-            <string>Compact polarimetric functions</string>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="plainText">
-            <string>**Note: Please select a valid matrix folder generated from PolSARpro.
-
+             <property name="plainText">
+              <string>
 MF3CC: Model Free 3-component Scattering Power Decomposition 
 
 DOP: Degree of polarization for Compact Polarimetric SAR Data
@@ -475,71 +768,262 @@ DOP: Degree of polarization for Compact Polarimetric SAR Data
 CpRVI: Compact-pol Radar Vegetation Index
 
 iS-Omega: Improved S-Omega decomposition for compact-pol data</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="dp_tab">
-        <property name="toolTip">
-         <string/>
-        </property>
-        <attribute name="title">
-         <string>Dual-pol</string>
-        </attribute>
-        <layout class="QGridLayout" name="gridLayout_12">
-         <item row="1" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_36">
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Select parameter:</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QComboBox" name="dp_parm">
+          </layout>
+         </widget>
+         <widget class="QWidget" name="dp_tab">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <attribute name="title">
+           <string>Dual-pol</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_36">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Select parameter:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="dp_parm">
+               <property name="toolTip">
+                <string>Select the SAR descriptor</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DpRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>PRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DOP</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>RVI</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_35">
+               <item>
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>Window Size</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="dp_ws">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>2</number>
+                 </property>
+                 <property name="value">
+                  <number>7</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_37">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_37">
+             <item>
+              <spacer name="horizontalSpacer_38">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_38"/>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_33">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_34">
+               <item>
+                <widget class="QLineEdit" name="inFolder_dp">
+                 <property name="toolTip">
+                  <string>Select folder using '...' button</string>
+                 </property>
+                 <property name="readOnly">
+                  <bool>true</bool>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="dp_browse">
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Select the folder</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEdit_3">
              <property name="toolTip">
-              <string>Select the SAR descriptor</string>
+              <string>Dual polarimetric functions</string>
              </property>
-             <item>
-              <property name="text">
-               <string>Select</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>DpRVI</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>PRVI</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>DOP</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>RVI</string>
-              </property>
-             </item>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="plainText">
+              <string>
+DpRVI: Dual Polarimetric Radar Vegetation Index
+
+RVI: Radar Vegetation Index
+
+PRVI: Polarimetric Radar Vegetation Index
+
+DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, V) or, (V,H)]</string>
+             </property>
             </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_35">
+          </layout>
+         </widget>
+         <widget class="QWidget" name="other">
+          <attribute name="title">
+           <string>other</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEdit_5">
+             <property name="toolTip">
+              <string>Dual polarimetric functions</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="plainText">
+              <string>
+rflee: Refined Lee speckle filter
+
+boxcar:
+
+convert_S:
+</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
              <item>
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Select parameter:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="fp_parm_3">
+               <property name="toolTip">
+                <string>Select the SAR descriptor</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>GRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF3CF</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>PRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DOP</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>RVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF4CF</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_13">
                <property name="text">
                 <string>Window Size</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="dp_ws">
+              <widget class="QSpinBox" name="fp_ws_3">
                <property name="minimum">
                 <number>1</number>
                </property>
@@ -551,49 +1035,25 @@ iS-Omega: Improved S-Omega decomposition for compact-pol data</string>
                </property>
               </widget>
              </item>
+             <item>
+              <spacer name="horizontalSpacer_11">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </item>
-           <item>
-            <spacer name="horizontalSpacer_37">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="2" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_37">
-           <item>
-            <spacer name="horizontalSpacer_38">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_38"/>
-           </item>
-          </layout>
-         </item>
-         <item row="3" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_33">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_34">
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
              <item>
-              <widget class="QLineEdit" name="inFolder_dp">
+              <widget class="QLineEdit" name="inFolder_dp_2">
                <property name="toolTip">
                 <string>Select folder using '...' button</string>
                </property>
@@ -605,53 +1065,106 @@ iS-Omega: Improved S-Omega decomposition for compact-pol data</string>
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="dp_browse_2">
+               <property name="maximumSize">
+                <size>
+                 <width>40</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Select the folder</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
-           <item>
-            <widget class="QPushButton" name="dp_browse">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>16777215</height>
-              </size>
-             </property>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="Analysis">
+          <attribute name="title">
+           <string>Analysis</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QPlainTextEdit" name="plainTextEdit_6">
              <property name="toolTip">
-              <string>Select the folder</string>
+              <string>Full polarimetric functions</string>
              </property>
-             <property name="text">
-              <string>...</string>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="plainText">
+              <string>
+plots
+</string>
              </property>
             </widget>
            </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_13">
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Select parameter:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="fp_parm_4">
+               <property name="toolTip">
+                <string>Select the SAR descriptor</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>GRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF3CF</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>PRVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>DOP</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>RVI</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>MF4CF</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
           </layout>
-         </item>
-         <item row="0" column="0">
-          <widget class="QPlainTextEdit" name="plainTextEdit_3">
-           <property name="toolTip">
-            <string>Dual polarimetric functions</string>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-           <property name="plainText">
-            <string>**Note: Please select a valid matrix folder generated from PolSARpro.
-
-DpRVI: Dual Polarimetric Radar Vegetation Index
-
-RVI: Radar Vegetation Index
-
-PRVI: Polarimetric Radar Vegetation Index
-
-DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, V) or, (V,H)]</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
+         </widget>
+        </widget>
+       </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
@@ -766,8 +1279,7 @@ DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, 
        <item>
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>&lt;html&gt;&lt;body&gt;&lt;p&gt;&amp;#169; Developed by &lt;a href=&quot;http://www.mrslab.in/&quot;&gt; MRSLab&lt;/a&gt;, IIT Bombay.                                                                         
-&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;© Jointly developed &lt;a href=&quot;http://www.mrslab.in/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;MRSLab&lt;/span&gt;&lt;/a&gt;, IIT Bombay and &lt;a href=&quot;https://www.umass.edu/microwave-remote-sensing/about/about-mirsl&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;MiRSL&lt;/span&gt;&lt;/a&gt;, UMass Amherst. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

@@ -85,7 +85,7 @@ class PolSAR(object):
     def log(self, message): self.dlg.terminal.append(f"(polsartools) $ {message}")
 
     def startProcess(self):
-        mode_map = {0: "fp", 1: "cp", 2: "dp"}
+        mode_map = {2: "fp", 3: "cp", 4: "dp"}
         mode = mode_map.get(self.dlg.tabWidget.currentIndex())
         if not mode:
             return

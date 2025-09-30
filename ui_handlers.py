@@ -47,7 +47,7 @@ COB_UI_MAP = {
 }
 
 def Cob_parm(self):
-    mode_map = {0: ("fp", self.dlg.fp_parm), 1: ("cp", self.dlg.cp_parm), 2: ("dp", self.dlg.dp_parm)}
+    mode_map = {2: ("fp", self.dlg.fp_parm), 3: ("cp", self.dlg.cp_parm), 4: ("dp", self.dlg.dp_parm)}
     mode, widget = mode_map.get(self.dlg.tabWidget.currentIndex(), (None, None))
     if not mode:
         return
@@ -79,18 +79,18 @@ def openRaster(self):
     # logger.append(str(self.dlg.tabWidget.currentIndex()))
     self.showTip() # pop-up tip
     
-    if self.dlg.tabWidget.currentIndex() == 0:
+    if self.dlg.tabWidget.currentIndex() == 2:
         self.inFolder = str(QFileDialog.getExistingDirectory(
                         self.dlg, "Select T3/C3 Folder"))                   
         self.dlg.inFolder_fp.setText(self.inFolder)
         
             
-    if self.dlg.tabWidget.currentIndex() == 1:
+    if self.dlg.tabWidget.currentIndex() == 3:
         self.inFolder = str(QFileDialog.getExistingDirectory(
                         self.dlg, "Select C2 Folder"))
         self.dlg.inFolder_cp.setText(self.inFolder)
 
-    if self.dlg.tabWidget.currentIndex() == 2:
+    if self.dlg.tabWidget.currentIndex() == 4:
         self.inFolder = str(QFileDialog.getExistingDirectory(
                         self.dlg, "Select C2 Folder"))
         self.dlg.inFolder_dp.setText(self.inFolder)
@@ -106,11 +106,11 @@ def chi_update(self):
         
 def ws_update(self):
     
-    if self.dlg.tabWidget.currentIndex()==0:
-        self.ws = int(self.dlg.fp_ws.value())
-    if self.dlg.tabWidget.currentIndex()==1:
-        self.ws = int(self.dlg.cp_ws.value())
     if self.dlg.tabWidget.currentIndex()==2:
+        self.ws = int(self.dlg.fp_ws.value())
+    if self.dlg.tabWidget.currentIndex()==3:
+        self.ws = int(self.dlg.cp_ws.value())
+    if self.dlg.tabWidget.currentIndex()==4:
         self.ws = int(self.dlg.dp_ws.value())
     if self.ws%2==0:
         self.ws+=1
