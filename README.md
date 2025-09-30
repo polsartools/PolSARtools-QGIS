@@ -4,8 +4,14 @@
 
 ### A [QGIS](https://qgis.org/en/site/index.html) plugin for processing Polarimetric Synthetic Aperture Radar (PolSAR) data.
 [![GitHub release](https://img.shields.io/github/release/Narayana-Rao/PolSAR-tools.svg)](https://github.com/Narayana-Rao/PolSAR-tools/releases)
-[![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
+[![PolSAR_tools](https://img.shields.io/badge/QGIS%20Repo-PolSAR_tools-589632)](https://plugins.qgis.org/plugins/polsar_tools/)
 
+![📥 Downloads](https://img.shields.io/badge/dynamic/json?color=green&label=%F0%9F%93%A5%20downloads&query=$.PolSAR_tools.downloads&url=https://raw.githubusercontent.com/Mariosmsk/qgis-plugins-downloads/main/data/plugins.json)
+![⭐ Stars](https://img.shields.io/badge/dynamic/json?color=blue&label=%E2%AD%90%20stars&query=$.PolSAR_tools.stars&url=https://raw.githubusercontent.com/Mariosmsk/qgis-plugins-downloads/main/data/plugins.json)
+
+
+
+[![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
 [![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
 
 [![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.7.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
