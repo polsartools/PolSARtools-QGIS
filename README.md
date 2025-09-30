@@ -3,18 +3,15 @@
 </p>
 
 ### A [QGIS](https://qgis.org/en/site/index.html) plugin for processing Polarimetric Synthetic Aperture Radar (PolSAR) data.
-[![DOI](https://zenodo.org/badge/238603440.svg)](https://zenodo.org/badge/latestdoi/238603440)
-[![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
-[![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-green.svg)](https://opensource.org/licenses/gpl-license)
-[![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
-[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-ffd040.svg)](https://www.python.org/)
 [![GitHub release](https://img.shields.io/github/release/Narayana-Rao/PolSAR-tools.svg)](https://github.com/Narayana-Rao/PolSAR-tools/releases)
-[![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.6.3.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/graphs/commit-activity)
-[![Website http://www.mrslab.in/qgisplugin/](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://www.mrslab.in/qgisplugin/)
+[![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
+
+[![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
+
+[![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.7.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
+[![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-green.svg)](https://opensource.org/licenses/gpl-license)
+
 ## General Information
--------------------
 This plugin generates derived SAR parameters (viz. vegetation indices, polarimetric decomposition parameters) from input polarimetric matrix (C3, T3, C2, T2). The input data needs to be in GeoTIff or [PolSARpro](https://earth.esa.int/web/polsarpro/home)/[ENVI](https://www.l3harrisgeospatial.com/Software-Technology/ENVI) format (\*.bin and \*.hdr). 
 
 ## Installation
@@ -58,7 +55,7 @@ Additional ``reset`` button to clear the environment, ``view data`` button to im
 
 
 ## Available functionalities:
------------------------------
+
   * Full-pol :
     * Model free 3-Component decomposition for full-pol data (MF3CF)[[4]](#4)
 	* Radar Vegetation Index (RVI) [[8]](#8) 
@@ -132,8 +129,12 @@ It is possible that the plugin may show not responding for larger datasets but p
 </p>
 
 
-> **Cite:** Bhogapurapu, N., Dey, S., Mandal, D., Bhattacharya, A. and Rao, Y.S., 2021. PolSAR tools: A QGIS plugin for generating SAR descriptors. Journal of Open Source Software, 6(60), p.2970. doi:  [10.21105/joss.02970](https://doi.org/10.21105/joss.02970)  
-
+## Citation
+```markdown
+Bhogapurapu, N., Dey, S., Mandal, D., Bhattacharya, A. and Rao, Y.S., 2021.
+PolSAR tools: A QGIS plugin for generating SAR descriptors. Journal of Open Source Software, 6(60), p.2970.
+doi:  [10.21105/joss.02970](https://doi.org/10.21105/joss.02970)  
+```
 
 ```bibtex
 @article{bhogapurapu2021polsar,
@@ -151,7 +152,7 @@ It is possible that the plugin may show not responding for larger datasets but p
 
 
 ## References
--------------
+
 <a id="1">[1]</a> 
 Chang, J.G., Shoshany, M. and Oh, Y., 2018. Polarimetric Radar Vegetation Index for Biomass Estimation in Desert Fringe Ecosystems. IEEE Transactions on Geoscience and Remote Sensing, 56(12), pp.7102-7108.
 
