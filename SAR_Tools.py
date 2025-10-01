@@ -50,10 +50,12 @@ class PolSAR(object):
         self.showTip = showTip.__get__(self)
 
         # Connect UI signals
+        self.dlg.pp_browse.clicked.connect(self.openRaster)
         self.dlg.fp_browse.clicked.connect(self.openRaster)
         self.dlg.cp_browse.clicked.connect(self.openRaster)
         self.dlg.dp_browse.clicked.connect(self.openRaster)
 
+        self.dlg.pp_parm.currentIndexChanged.connect(self.Cob_parm)
         self.dlg.fp_parm.currentIndexChanged.connect(self.Cob_parm)
         self.dlg.cp_parm.currentIndexChanged.connect(self.Cob_parm)
         self.dlg.dp_parm.currentIndexChanged.connect(self.Cob_parm)
@@ -61,6 +63,7 @@ class PolSAR(object):
         self.dlg.cp_sb_psi.valueChanged.connect(self.psi_update)
         self.dlg.cp_sb_chi.valueChanged.connect(self.chi_update)
 
+        self.dlg.pp_ws.valueChanged.connect(self.ws_update)
         self.dlg.fp_ws.valueChanged.connect(self.ws_update)
         self.dlg.cp_ws.valueChanged.connect(self.ws_update)
         self.dlg.dp_ws.valueChanged.connect(self.ws_update)
@@ -85,14 +88,15 @@ class PolSAR(object):
     def log(self, message): self.dlg.terminal.append(f"(polsartools) $ {message}")
 
     def startProcess(self):
-        mode_map = {2: "fp", 3: "cp", 4: "dp"}
+        mode_map = {1: "pp", 2: "fp", 3: "cp", 4: "dp"}
         mode = mode_map.get(self.dlg.tabWidget.currentIndex())
         if not mode:
             return
 
         indX = (self.dlg.fp_parm.currentIndex() if mode == "fp"
                 else self.dlg.cp_parm.currentIndex() if mode == "cp"
-                else self.dlg.dp_parm.currentIndex())
+                else self.dlg.dp_parm.currentIndex() if mode == "dp"
+                else self.dlg.pp_parm.currentIndex())
 
         process_info = PROCESS_MAP.get(mode, {}).get(indX)
         if not process_info:

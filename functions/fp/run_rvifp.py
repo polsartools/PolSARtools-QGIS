@@ -7,6 +7,6 @@ if __name__ == "__main__":
     in_folder = sys.argv[1]
     ws_path = int(sys.argv[2])
     print(f"(polsartools) $ Running rvifp with {in_folder} and {ws_path}", flush=True)
-    pst.rvifp(in_folder, ws_path, 
+    pst.rvi_fp(in_folder, ws_path, 
               progress_callback=progress_callback
               )

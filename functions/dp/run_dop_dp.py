@@ -7,6 +7,6 @@ if __name__ == "__main__":
     in_folder = sys.argv[1]
     ws_path = int(sys.argv[2])
     print(f"(polsartools) $ Running dop_dp with {in_folder} and {ws_path}", flush=True)
-    pst.dopdp(in_folder, ws_path, 
+    pst.dop_dp(in_folder, ws_path, 
               progress_callback=progress_callback
               )
