@@ -17,8 +17,8 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'SAR tools'
-copyright = '2020, PolSAR tools team'
+project = 'PolSAR tools-QGIS'
+copyright = '2025, PolSAR tools team'
 author = 'Narayanarao Bhogapurapu'
 
 # The full version, including alpha/beta/rc tags
