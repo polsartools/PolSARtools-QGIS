@@ -118,6 +118,12 @@ class PolSAR(object):
             extra.append(str(self.dlg.pp_rglks.value()))
         if "mat" in required_args:
             extra.append(str(self.dlg.pp_mat.currentIndex()))
+            
+        for arg in required_args:
+            if arg.startswith("func="):
+                extra.append(arg.split("=")[1])
+            if arg.startswith("model="):
+                extra.append(arg.split("=")[1])
 
 
         try:

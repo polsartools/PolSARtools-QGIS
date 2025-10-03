@@ -45,6 +45,9 @@ COB_UI_MAP = {
         12: ["inFolder_fp", "fp_browse"],
         13: ["inFolder_fp", "fp_browse"],
         14: ["inFolder_fp", "fp_browse"],
+        15: ["inFolder_fp", "fp_browse"],
+        16: ["inFolder_fp", "fp_browse"],
+        17: ["inFolder_fp", "fp_browse"],
     },
     "cp": {
         1: ["inFolder_cp", "cp_browse"],
