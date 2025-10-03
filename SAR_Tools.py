@@ -31,6 +31,7 @@ class PolSAR(object):
         self.ws = 5
         self.psi_val = 0
         self.chi_val = 45
+    
 
         # Monkey-patch imported helpers so they see self
         self.run_process = run_process.__get__(self)
@@ -71,7 +72,7 @@ class PolSAR(object):
         self.dlg.pb_view.clicked.connect(self.viewData)
         self.dlg.clear_terminal.clicked.connect(self.clear_log)
         self.dlg.pb_process.clicked.connect(self.startProcess)
-        self.dlg.help_btn.clicked.connect(lambda: webbrowser.open('https://sar-tools.readthedocs.io/en/latest/'))
+        self.dlg.help_btn.clicked.connect(lambda: webbrowser.open('https://sar-tools.readthedocs.io'))
         self.dlg.close_btn.clicked.connect(self.closeui_fn)
 
         self.dlg.tabWidget.currentChanged.connect(self.Cob_parm)
@@ -102,13 +103,30 @@ class PolSAR(object):
         if not process_info:
             return
 
-        label, script, needs_tau = (process_info + (False,))[:3]
-        extra = [str(self.dlg.cp_cb_tau.currentIndex())] if needs_tau else None
+        label, script, required_args = (process_info + ([],))[:3]
+        extra = []
+
+        if "tau" in required_args:
+            extra.append(str(self.dlg.cp_cb_tau.currentIndex()))
+        if "psi" in required_args:
+            extra.append(str(self.psi_val))
+        if "chi" in required_args:
+            extra.append(str(self.chi_val))
+        if "azlks" in required_args:
+            extra.append(str(self.dlg.pp_azlks.value()))
+        if "rglks" in required_args:
+            extra.append(str(self.dlg.pp_rglks.value()))
+        if "mat" in required_args:
+            extra.append(str(self.dlg.pp_mat.currentIndex()))
+
 
         try:
             self.run_process(label, script, extra)
-        except Exception:
-            self.log("Error!! Invalid data folder.")            
+        except Exception as e:
+            self.log("Error!! Invalid data folder.")
+            self.log(f"Exception: {str(e)}")
+
+          
     #################################################################################################
     # GUI/Plugin lifecycle
     #################################################################################################

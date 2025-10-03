@@ -17,32 +17,40 @@ from .qt_compat import (
 # Process Mapping
 #################################################################################################
 PROCESS_MAP = {
+    "pp": {
+        1: ("MLOOK pst", "functions/preprocess/run_mlook.py", ["azlks", "rglks"]),
+        2: ("BOXCAR pst", "functions/preprocess/run_boxcar.py", []),
+        3: ("RFLEE pst", "functions/preprocess/run_rflee.py", []),
+        4: ("Convert S pst", "functions/preprocess/run_convert_s.py", ["azlks", "rglks","mat"]),
+    },
     "fp": {
-        1: ("GRVI FP pst", "functions/fp/run_grvi.py"),
-        2: ("NM3CF FP pst", "functions/fp/run_nm3cf.py"),
-        3: ("PRVI FP pst", "functions/fp/run_prvifp.py"),
-        4: ("DOP FP pst", "functions/fp/run_dopfp.py"),
-        5: ("RVI FP pst", "functions/fp/run_rvifp.py"),
-        6: ("MF4CF FP pst", "functions/fp/run_mf4cf.py"),
+        1: ("GRVI FP pst", "functions/fp/run_grvi.py", []),
+        2: ("NM3CF FP pst", "functions/fp/run_nm3cf.py", []),
+        3: ("PRVI FP pst", "functions/fp/run_prvifp.py", []),
+        4: ("DOP FP pst", "functions/fp/run_dopfp.py", []),
+        5: ("RVI FP pst", "functions/fp/run_rvifp.py", []),
+        6: ("MF4CF FP pst", "functions/fp/run_mf4cf.py", []),
     },
     "cp": {
-        1: ("NM3CC CP pst", "functions/cp/run_nm3cc.py", True),
-        2: ("DOP CP pst", "functions/cp/run_dop_cp.py", True),
-        3: ("CPRVI pst", "functions/cp/run_cprvi.py", True),
-        4: ("miSOmega pst", "functions/cp/run_misomega.py", True),
+        1: ("NM3CC CP pst", "functions/cp/run_nm3cc.py", ["tau", "psi", "chi"]),
+        2: ("DOP CP pst", "functions/cp/run_dop_cp.py", ["tau", "psi", "chi"]),
+        3: ("CPRVI pst", "functions/cp/run_cprvi.py", ["tau", "psi", "chi"]),
+        4: ("miSOmega pst", "functions/cp/run_misomega.py", ["tau", "psi", "chi"]),
     },
     "dp": {
-        1: ("DpRVI pst", "functions/dp/run_dprvi.py"),
-        2: ("PRVI dp pst", "functions/dp/run_prvidp.py"),
-        3: ("DOP dp pst", "functions/dp/run_dop_dp.py"),
-        4: ("RVI dp pst", "functions/dp/run_rvidp.py"),
+        1: ("DpRVI pst", "functions/dp/run_dprvi.py", []),
+        2: ("PRVI dp pst", "functions/dp/run_prvidp.py", []),
+        3: ("DOP dp pst", "functions/dp/run_dop_dp.py", []),
+        4: ("RVI dp pst", "functions/dp/run_rvidp.py", []),
     }
 }
+
 
 #################################################################################################
 # Process Runner
 #################################################################################################
 def run_process(self, label, script_name, extra_args=None):
+    self.dlg.progressBar.setValue(0)
     self.log(f"Calculating {label}...")
     self.process = QProcess()
     self.process.setProgram("python")

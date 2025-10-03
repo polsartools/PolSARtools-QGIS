@@ -25,10 +25,10 @@ from .qt_compat import (
 #################################################################################################
 COB_UI_MAP = {
     "pp": {
-        1: ["inFolder_pp", "pp_browse"],
+        1: ["inFolder_pp", "pp_browse","pp_azlks","pp_rglks"],
         2: ["inFolder_pp", "pp_browse"],
         3: ["inFolder_pp", "pp_browse"],
-        4: ["inFolder_pp", "pp_browse"],
+        4: ["inFolder_pp", "pp_browse","pp_azlks","pp_rglks","pp_mat"],
     },
     "fp": {
         1: ["inFolder_fp", "fp_browse"],
@@ -63,7 +63,10 @@ COB_UI_MAP = {
 }
 
 def Cob_parm(self):
-    mode_map = {1: ("pp", self.dlg.pp_parm), 2: ("fp", self.dlg.fp_parm), 3: ("cp", self.dlg.cp_parm), 4: ("dp", self.dlg.dp_parm)}
+    mode_map = {1: ("pp", self.dlg.pp_parm), 
+                2: ("fp", self.dlg.fp_parm), 
+                3: ("cp", self.dlg.cp_parm), 
+                4: ("dp", self.dlg.dp_parm)}
     mode, widget = mode_map.get(self.dlg.tabWidget.currentIndex(), (None, None))
     if not mode:
         return
@@ -73,7 +76,7 @@ def Cob_parm(self):
 
     # Disable all first
     for w in [
-              "inFolder_pp", "pp_browse", 
+              "inFolder_pp", "pp_browse", "pp_azlks","pp_rglks","pp_mat",
               "inFolder_fp", "fp_browse", 
               "inFolder_cp", "cp_browse", "cp_sb_psi", "cp_sb_chi", 
               "inFolder_dp", "dp_browse"]:
@@ -97,11 +100,11 @@ def show_error(self, text, title="Error!"):
 def openRaster(self):
     """Open raster from file dialog"""
     # logger.append(str(self.dlg.tabWidget.currentIndex()))
-    self.showTip() # pop-up tip
+    # self.showTip() # pop-up tip
     
     if self.dlg.tabWidget.currentIndex() == 1:
         self.inFolder = str(QFileDialog.getExistingDirectory(
-                        self.dlg, "Select a matrix Folder"))                   
+                        self.dlg, "Select a PolSAR matrix Folder"))                   
         self.dlg.inFolder_pp.setText(self.inFolder)
         
     if self.dlg.tabWidget.currentIndex() == 2:

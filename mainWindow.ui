@@ -61,7 +61,7 @@
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>2</number>
          </property>
          <property name="movable">
           <bool>true</bool>
@@ -185,11 +185,75 @@ convert_S:
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>148</width>
+                 <width>58</width>
                  <height>20</height>
                 </size>
                </property>
               </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>matrix</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="pp_mat">
+               <property name="toolTip">
+                <string>Select the SAR descriptor</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Select</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>C2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>T2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>C3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>T3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>C4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>T4</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>C2HX</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>C2VX</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>C2HV</string>
+                </property>
+               </item>
+              </widget>
              </item>
              <item>
               <widget class="QLabel" name="label_12">
@@ -241,7 +305,7 @@ convert_S:
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>178</width>
+                 <width>88</width>
                  <height>20</height>
                 </size>
                </property>

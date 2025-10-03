@@ -6,8 +6,7 @@ from functions.utils.utils import progress_callback
 if __name__ == "__main__":
     in_folder = sys.argv[1]
     ws_path = int(sys.argv[2])
-    tau = int(sys.argv[3])
-    print(f"(polsartools) $ Running dopcp with {in_folder}, {tau}, and {ws_path}", flush=True)
-    pst.dop_cp(in_folder, tau, 0, ws_path, 
+    print(f"(polsartools) $ Running rlee with {in_folder} and {ws_path}", flush=True)
+    pst.rlee(in_folder, ws_path, 
               progress_callback=progress_callback
               )
