@@ -23,7 +23,7 @@ class PolSAR(object):
         self.plugin_dir = os.path.dirname(__file__)
         self.dlg = PST_Dialog()
         self.actions = []
-        self.menu = self.tr(u'&PolSAR tools')
+        self.menu = self.tr(u'&PolSAR-tools')
         self.first_start = None
 
         # State
@@ -147,12 +147,12 @@ class PolSAR(object):
         return action
 
     def initGui(self):
-        icon_path = ':/plugins/SAR_Tools/icon.png'
+        icon_path = ':/plugins/PolSAR-tools/icon.png'
         self.add_action(icon_path, text=self.tr(u'Process'), callback=self.run, parent=self.iface.mainWindow())
 
     def unload(self):
         for action in self.actions:
-            self.iface.removePluginMenu(self.tr(u'&PolSAR tools'), action)
+            self.iface.removePluginMenu(self.tr(u'&PolSAR-tools'), action)
             self.iface.removeToolBarIcon(action)
 
     def run(self):
