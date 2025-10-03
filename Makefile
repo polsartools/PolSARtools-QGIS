@@ -5,7 +5,7 @@
 #							 -------------------
 #		begin				: 2020-02-03
 #		git sha				: $Format:%H$
-#		copyright			: (C) 2020 by MRSLab
+#		copyright           : (C) 2020 by PolSAR tools team
 #		email				: bnarayanarao@iitb.ac.in
 # ***************************************************************************/
 #
@@ -46,7 +46,7 @@ PY_FILES = \
 	__init__.py \
 	SAR_Tools.py SAR_Tools_dialog.py
 
-UI_FILES = SAR_Tools_dialog_base.ui
+UI_FILES = mainWindow.ui
 
 EXTRAS = metadata.txt icon.png
 

@@ -18,11 +18,11 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = 'SAR tools'
-copyright = '2020, Narayanarao Bhogapurapu'
+copyright = '2020, PolSAR tools team'
 author = 'Narayanarao Bhogapurapu'
 
 # The full version, including alpha/beta/rc tags
-release = 'v0.6.2'
+release = 'v0.8'
 
 
 # -- General configuration ---------------------------------------------------

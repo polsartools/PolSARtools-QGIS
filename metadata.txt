@@ -5,17 +5,17 @@
 [general]
 name=PolSAR tools
 qgisMinimumVersion=3.0
-description=This plugin generates polarimetric descriptors from SAR data.
-version=0.7
+description=A QGIS plugin for processing Polarimetric Synthetic Aperture Radar (PolSAR) data.
+version=0.8
 author=Narayanarao; Subhadip; Dipankar
 email=bnarayanarao@iitb.ac.in
 owners=bnarayanarao
 supportsQt6=True
 
-about=This plugin generates polarimetric descriptors (viz. vegetation indices, polarimetric decomposition parameters) from C3/T3/C2/T2 matrices obtained from PolSARpro. It requires numpy, scipy, matplotlib python libraries pre-installed.
+about=This plugin generates derived SAR parameters (viz. polarimetric descriptors, vegetation indices, polarimetric decomposition parameters) from input polarimetric matrix (S2, C4, C3, T4, T3, Sxy, C2, T2).
 
-tracker=https://github.com/Narayana-Rao/sar_tools/issues
-repository=https://github.com/Narayana-Rao/sar_tools.git
+tracker=https://github.com/polsartools/PolSARtools-QGIS/issues
+repository=https://github.com/polsartools/PolSARtools-QGIS.git
 # End of mandatory metadata
 
 # Recommended items:
@@ -23,6 +23,9 @@ repository=https://github.com/Narayana-Rao/sar_tools.git
 hasProcessingProvider=no
 # Uncomment the following line and add your changelog:
 changelog= 
+	0.8
+	- integrated with polsartools python package.
+	- extended to support QT6 
 
 	0.7
 	- Added MF4CF functionality. 
@@ -48,7 +51,7 @@ changelog=
 # Tags are comma separated with spaces allowed
 tags=sar,polsar,dprvi,rvi,prvi,cprvi,mf3cf,mf4cf,mf3cc,dop,grvi,decomposition,vegetation, vegetation index, sarindex, isomega, compactpol,dualpol,fullpol,mrslab
 
-homepage=https://github.com/Narayana-Rao/sar_tools/blob/master/README.md
+homepage=https://github.com/polsartools/PolSARtools-QGIS
 category=Plugins
 icon=icon.png
 # experimental flag

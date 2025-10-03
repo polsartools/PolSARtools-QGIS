@@ -26,5 +26,5 @@ PolSAR tools is a QGIS plugin, which generates derived SAR parameters ( vegetati
 
 About
 =====
-The current version of PolSAR tools is v0.6.3 and is licensed under the GPL-3.0 license. 
+The current version of PolSAR tools is licensed under the GPL-3.0 license. 
 
