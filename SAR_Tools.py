@@ -164,12 +164,12 @@ class PolSAR(object):
 
     def Startup(self):
         logger = self.dlg.terminal
-        logger.append("\n\tWelcome to PolSAR tools!")
+        logger.append("\n\t\tWelcome to PolSAR tools!")
         logger.append("\t================================\n")
         logger.append("\tThis plugin generates Polarimetric SAR parameters.")
         logger.append("\t   🔹 SAR Indices       🔹 Decomposition Parameters\n")
         logger.append("\t-----------------------------------------------------------------\n")
-        logger.append('Tip: Start by selecting a parameter from the "Select Parameter" dropdown menu.\n')
+        logger.append('Tip: Start by selecting a function from the "Select function" dropdown menu.\n')
 
 #################################################################################################
 # Exception

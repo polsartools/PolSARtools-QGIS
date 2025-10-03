@@ -40,7 +40,7 @@ SOURCES = \
 	__init__.py \
 	SAR_Tools.py SAR_Tools_dialog.py
 
-PLUGINNAME = SAR_Tools
+PLUGINNAME = PolSAR-tools
 
 PY_FILES = \
 	__init__.py \
@@ -65,7 +65,7 @@ PEP8EXCLUDE=pydev,resources.py,conf.py,third_party,ui
 #	* Windows:
 #	  AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins'
 
-QGISDIR=C:\Users\ysrao\AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins
+QGISDIR=C:\Users\nbhogapurapu\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins
 
 #################################################
 # Normally you would not need to edit below here
