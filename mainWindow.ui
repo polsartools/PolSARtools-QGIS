@@ -61,7 +61,7 @@
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <property name="movable">
           <bool>true</bool>
@@ -89,13 +89,13 @@
              </property>
              <property name="plainText">
               <string>
-mlook: 
+mlook: Multi-looking 
 
-boxcar:
+boxcar: Boxcar speckle filter
 
-rflee: Refined Lee speckle filter
+rlee: Refined Lee speckle filter
 
-convert_S:
+convert_S: Convert single-look S to multi-looked C/T matrix 
 </string>
              </property>
             </widget>
@@ -131,7 +131,7 @@ convert_S:
                </item>
                <item>
                 <property name="text">
-                 <string>rflee</string>
+                 <string>rlee</string>
                 </property>
                </item>
                <item>
@@ -384,27 +384,27 @@ RVI: Radar Vegetation Index
 
 MF4CF: Model Free 4-component Scattering Power Decomposition
 
-HAlpha :
+HAlpha : H/A/α Decomposition
 
-TSVM: 
+TSVM: Touzi decomposition
 
-Freeman_3c : 
+Freeman_3c : Freeman 3-Component decomposition
 
-Freeman_2c : 
+Freeman_2c : Freeman 2-Component decomposition
 
-Nuemann :
+Neumann : Neumann decomposition
 
-NNED :
+NNED : Non-negative Eigen Value decomposition
 
-Shannon_H : 
+Shannon_H : Shannon entropy
 
-Praks :
+Praks : Praks polarimetric parameters
 
-Yam4C :
+Yam4C : Yamaguchi 4-Component decomposition
 
-Yam4CR :
+Yam4CR :  Yamaguchi 4-Component decomposition (rotation-corrected)
 
-Yam4CS :</string>
+Yam4CS : Yamaguchi 4-Component decomposition (extended volume scattering model)</string>
              </property>
             </widget>
            </item>
@@ -897,7 +897,7 @@ iS-Omega: Improved S-Omega decomposition for compact-pol data</string>
                </item>
                <item>
                 <property name="text">
-                 <string>HAlpha</string>
+                 <string>H-Alpha</string>
                 </property>
                </item>
                <item>
@@ -1019,7 +1019,11 @@ RVI: Radar Vegetation Index
 
 PRVI: Polarimetric Radar Vegetation Index
 
-DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, V) or, (V,H)]</string>
+DOP: Degree of polarization for Dual Polarimetric (XX/XY) SAR Data [(X, Y): (H, V) or, (V,H)]
+
+HAlpha: H/α decomposition 
+
+Shannon: Shannon entropy </string>
              </property>
             </widget>
            </item>

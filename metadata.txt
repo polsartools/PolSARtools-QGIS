@@ -5,6 +5,7 @@
 [general]
 name=PolSAR tools
 qgisMinimumVersion=3.0
+qgisMaximumVersion=4.99.0
 description=A QGIS plugin for processing Polarimetric Synthetic Aperture Radar (PolSAR) data.
 version=0.8
 author=Narayanarao; Subhadip; Dipankar
@@ -24,8 +25,9 @@ hasProcessingProvider=no
 # Uncomment the following line and add your changelog:
 changelog= 
 	0.8
-	- integrated with polsartools python package.
-	- extended to support QT6 
+	- Integrated with polsartools python package.
+	- Added preprocess functions.
+	- Extended to support QT6. 
 
 	0.7
 	- Added MF4CF functionality. 
