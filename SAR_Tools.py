@@ -147,7 +147,7 @@ class PolSAR(object):
         return action
 
     def initGui(self):
-        icon_path = ':/plugins/PolSAR-tools/icon.png'
+        icon_path = ':/plugins/polsar_tools/icon.png'
         self.add_action(icon_path, text=self.tr(u'Process'), callback=self.run, parent=self.iface.mainWindow())
 
     def unload(self):

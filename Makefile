@@ -40,7 +40,7 @@ SOURCES = \
 	__init__.py \
 	SAR_Tools.py SAR_Tools_dialog.py
 
-PLUGINNAME = PolSAR-tools
+PLUGINNAME = polsar_tools
 
 PY_FILES = \
 	__init__.py \
