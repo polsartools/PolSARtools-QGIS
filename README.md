@@ -14,7 +14,7 @@
 [![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
 [![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
 
-[![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.7.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
+[![GitHub commits](https://img.shields.io/github/commits-since/Narayana-Rao/PolSAR-tools/v0.8.svg)](https://GitHub.com/Narayana-Rao/PolSAR-tools/commit/)
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-green.svg)](https://opensource.org/licenses/gpl-license)
 
 ## General Information
