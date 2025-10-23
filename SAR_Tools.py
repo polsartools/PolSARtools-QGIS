@@ -79,11 +79,33 @@ class PolSAR(object):
 
         self.check_pstools()
 
+    # def check_pstools(self):
+    #     try:
+    #         import polsartools
+    #     except ImportError:
+    #         pip_main(['install', 'polsartools'])
+
     def check_pstools(self):
         try:
             import polsartools
         except ImportError:
-            pip_main(['install', 'polsartools'])
+            try:
+                import sys
+                import io
+                if sys.stderr is None:
+                    sys.stderr = io.StringIO()
+
+                from pip._internal import main as pip_main
+                pip_main(['install', 'polsartools'])
+
+                # Try importing again after installation
+                import polsartools
+            except Exception as e:
+                # from qgis.PyQt.QtWidgets import QMessageBox
+                # QMessageBox.critical(None, "Plugin Error", f"Failed to install 'polsartools': {e}")
+                pass
+
+
             
     def tr(self, message): return QCoreApplication.translate('PolSAR', message)
     def log(self, message): self.dlg.terminal.append(f"(polsartools) $ {message}")
