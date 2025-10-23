@@ -173,8 +173,10 @@ class PolSAR(object):
                             f"Error: {e}")
                         return
 
-            elif os_type in ["Windows", "Darwin"]:  # macOS
+            elif os_type in [ "Darwin"]:  # macOS
                 subprocess.check_call(base_cmd)
+            elif os_type in ["Windows"]:
+                pip_main(['install', 'polsartools'])
 
             else:
                 QMessageBox.critical(None, "Plugin Error",
