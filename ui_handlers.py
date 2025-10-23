@@ -172,17 +172,16 @@ def viewData(self):
         for i in np.arange(0,np.size(list(names[0][0:])),1):
             try:
 
-                self.iface.addRasterLayer(str(names[0][i]))   
-                logger.append(str(names[0][i]))
+                self.iface.addRasterLayer(str(names[0][i]))  
+                log = self.dlg.terminal 
+                log.append(str(names[0][i]))
 
             except:
-                logger.append("(polsartools) $ invalid file type!!")
+                log = self.dlg.terminal
+                log.append("(polsartools) $ invalid file type!!")
 
     # logger.append(str(np.size(list(names[0][0:]))))
     # logger.append(str(f_path))    
-    
-    
-
         
 def clear_log(self):
     self.dlg.terminal.clear()

@@ -6,6 +6,11 @@ import os, multiprocessing, webbrowser
 
 from pip._internal import main as pip_main
 
+import sys
+import platform
+import subprocess
+import importlib.util
+
 from .SAR_Tools_dialog import PST_Dialog
 from .qt_compat import DialogExec, MessageIcon, MessageButton
 
@@ -85,26 +90,100 @@ class PolSAR(object):
     #     except ImportError:
     #         pip_main(['install', 'polsartools'])
 
+    # def check_pstools(self):
+    #     try:
+    #         import polsartools
+    #     except ImportError:
+    #         try:
+    #             import sys
+    #             import io
+    #             if sys.stderr is None:
+    #                 sys.stderr = io.StringIO()
+
+    #             from pip._internal import main as pip_main
+    #             pip_main(['install', 'polsartools'])
+
+    #             # Try importing again after installation
+    #             import polsartools
+    #         except Exception as e:
+    #             from qgis.PyQt.QtWidgets import QMessageBox
+    #             QMessageBox.critical(None, "Plugin Error", f"Failed to install 'polsartools': {e}")
+    #             # pass
+
+
+    # def check_pstools(self):
+    #     try:
+    #         import polsartools
+    #     except ImportError:
+    #         try:
+    #             os_type = platform.system()
+
+    #             if os_type == "Windows":
+    #                 subprocess.check_call([sys.executable, "-m", "pip", "install", "polsartools"])
+
+    #             elif os_type == "Linux":
+    #                 # Linux may block pip installs in system Python (PEP 668)
+    #                 try:
+    #                     subprocess.check_call([sys.executable, "-m", "pip", "install", "polsartools"])
+    #                 except subprocess.CalledProcessError as e:
+    #                     QMessageBox.critical(None, "Plugin Error",
+    #                         "Linux system Python may be externally managed.\n"
+    #                         "Try installing 'polsartools' manually in a virtual environment or using pipx.\n\n"
+    #                         f"Error: {e}")
+    #                     return
+
+    #             elif os_type == "Darwin":  # macOS
+    #                 subprocess.check_call([sys.executable, "-m", "pip", "install", "polsartools"])
+
+    #             else:
+    #                 QMessageBox.critical(None, "Plugin Error",
+    #                     f"Unsupported OS: {os_type}. Please install 'polsartools' manually.")
+    #                 return
+
+    #             # Try importing again after installation
+    #             import polsartools
+
+    #         except Exception as e:
+    #             QMessageBox.critical(None, "Plugin Error", f"Failed to install 'polsartools': {e}")
+
     def check_pstools(self):
+        if importlib.util.find_spec("polsartools") is not None:
+            return  # Already installed
+
+        os_type = platform.system()
+        base_cmd = [sys.executable, "-m", "pip", "install", "polsartools"]
+
         try:
-            import polsartools
-        except ImportError:
-            try:
-                import sys
-                import io
-                if sys.stderr is None:
-                    sys.stderr = io.StringIO()
+            if os_type == "Linux":
+                try:
+                    # Try normal install first
+                    subprocess.check_call(base_cmd)
+                except subprocess.CalledProcessError:
+                    # Retry with --break-system-packages
+                    try:
+                        subprocess.check_call(base_cmd + ["--break-system-packages"])
+                    except subprocess.CalledProcessError as e:
+                        QMessageBox.critical(None, "Plugin Error",
+                            "Linux system Python blocks pip installs due to PEP 668.\n\n"
+                            "To install 'polsartools' system-wide, you can run:\n"
+                            "  python3 -m pip install polsartools --break-system-packages\n\n"
+                            "Or use a virtual environment:\n"
+                            "  python3 -m venv myenv && source myenv/bin/activate\n"
+                            "  pip install polsartools\n\n"
+                            f"Error: {e}")
+                        return
 
-                from pip._internal import main as pip_main
-                pip_main(['install', 'polsartools'])
+            elif os_type in ["Windows", "Darwin"]:  # macOS
+                subprocess.check_call(base_cmd)
 
-                # Try importing again after installation
-                import polsartools
-            except Exception as e:
-                # from qgis.PyQt.QtWidgets import QMessageBox
-                # QMessageBox.critical(None, "Plugin Error", f"Failed to install 'polsartools': {e}")
-                pass
+            else:
+                QMessageBox.critical(None, "Plugin Error",
+                    f"Unsupported OS: {os_type}. Please install 'polsartools' manually.")
+                return
 
+        except Exception as e:
+            QMessageBox.critical(None, "Plugin Error",
+                f"Failed to install 'polsartools': {e}")
 
             
     def tr(self, message): return QCoreApplication.translate('PolSAR', message)
