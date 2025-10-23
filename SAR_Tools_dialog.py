@@ -6,8 +6,8 @@
                              -------------------
         begin                : 2020-02-03
         git sha              : $Format:%H$
-        copyright            : (C) 2020 by MRSLab
-        email                : bnarayanarao@iitb.ac.in
+        copyright            : (C) 2025 by PolSAR tools team
+        email                : bnarayanarao@nitw.ac.in
  ***************************************************************************/
 
 /***************************************************************************

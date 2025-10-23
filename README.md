@@ -10,7 +10,6 @@
 ![⭐ Stars](https://img.shields.io/badge/dynamic/json?color=blue&label=%E2%AD%90%20stars&query=$.PolSAR_tools.stars&url=https://raw.githubusercontent.com/Mariosmsk/qgis-plugins-downloads/main/data/plugins.json)
 
 
-
 [![Documentation Status](https://readthedocs.org/projects/sar-tools/badge/?version=latest)](https://sar-tools.readthedocs.io/en/latest/?badge=latest)
 [![status](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0/status.svg)](https://joss.theoj.org/papers/aba2f441ab3c99e7694c97345e1255a0)
 
@@ -18,7 +17,7 @@
 [![License: GPL 3.0](https://img.shields.io/badge/License-GPL_3.0-green.svg)](https://opensource.org/licenses/gpl-license)
 
 ## General Information
-This plugin generates derived SAR parameters (viz. vegetation indices, polarimetric decomposition parameters) from input polarimetric matrix (C3, T3, C2, T2). The input data needs to be in GeoTIff or [PolSARpro](https://earth.esa.int/web/polsarpro/home)/[ENVI](https://www.l3harrisgeospatial.com/Software-Technology/ENVI) format (\*.bin and \*.hdr). 
+This plugin generates derived SAR parameters (viz. vegetation indices, polarimetric decomposition parameters) from input polarimetric matrix (C3, T3, C2, T2). The input data needs to be in GeoTIff or [PolSARpro](https://earth.esa.int/web/polsarpro/home)/[ENVI](https://www.l3harrisgeospatial.com/Software-Technology/ENVI) format. 
 
 ## Installation
 
@@ -27,8 +26,9 @@ This plugin generates derived SAR parameters (viz. vegetation indices, polarimet
 * The easiest way (requires internet connection) : 
     - Open QGIS -> Plugins -> Manage and Install Plugins... -> select ```All``` tab -> search for ```PolSAR tools``` --> select and install plugin
 * Alternative way (offline installation) : 
-    - Go to [releases](https://github.com/Narayana-Rao/SAR-tools/releases) of this repository -> select desired version -> download the ```.zip``` file.
-    - Open QGIS -> Plugins -> Manage and Install Plugins... -> ```install from ZIP``` tab --> select the downloaded zip --> install plugin (ignore warnings, if any).
+    - Go to [releases](https://github.com/polsartools/PolSARtools-QGIS/releases) of this repository -> select desired version -> download the ```.zip``` file.
+    - Rename the zip to ```polsar_tools.zip```
+    - Open QGIS -> Plugins -> Manage and Install Plugins... -> ```install from ZIP``` tab --> select the renamed zip --> install plugin (ignore warnings, if any).
  
 ## Up and running
 
@@ -63,7 +63,17 @@ Additional ``reset`` button to clear the environment, ``view data`` button to im
 ## Available functionalities:
 
   * Full-pol :
+    * H/A/α Decomposition
+    * Touzi decomposition
+    * Yamaguchi 4-Component decomposition
+    * Freeman 3-Component decomposition
+    * Freeman 2-Component decomposition
     * Model free 3-Component decomposition for full-pol data (MF3CF)[[4]](#4)
+    * Model Free 4-Component decomposition
+    * Neumann decomposition
+    * Non-negative Eigen Value decomposition 
+    * Shannon entropy
+    * Praks polarimetric parameters
 	* Radar Vegetation Index (RVI) [[8]](#8) 
     * Generalized volume Radar Vegetation Index (GRVI) [[2]](#2)
     * Polarimetric Radar Vegetation Index (PRVI) [[1]](#1)
@@ -80,6 +90,17 @@ Additional ``reset`` button to clear the environment, ``view data`` button to im
 	* Radar Vegetation Index (RVI) [[9]](#9)
     * Degree of Polarization (DOP) [[10]](#10) 
     * Polarimetric Radar Vegetation Index (PRVI) [[1]](#1)
+    * H/α decomposition 
+    * Shannon entropy
+    * Model Free 3-Component decomposition for dual-co-pol
+    * Dual-pol Radar Vegetation Index for GRD
+    * Dual polarimetric descriptors
+
+  * Preprocessing
+    * Multi-looking
+    * Convert single-look S (S2,Sxy)
+    * Refined-Lee filter
+    * Boxcar filter
 
 ## Example usage
 > Note: All the following processing steps should be done in sequential manner. Sample data for all the polarization modes is provided in [sample_data](/sample_data/) folder.

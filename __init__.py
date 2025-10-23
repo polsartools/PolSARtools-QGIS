@@ -7,8 +7,8 @@ This plugin generates derived SAR parameters from input polarimetric matrix (C3,
                               -------------------
         begin                : 2020-02-03
         git sha              : $Format:%H$
-        copyright            : (C) 2020 by PolSAR tools team
-        email                : bnarayanarao@iitb.ac.in
+        copyright            : (C) 2025 by PolSAR tools team
+        email                : bnarayanarao@nitw.ac.in
  ***************************************************************************/
 
 /***************************************************************************
