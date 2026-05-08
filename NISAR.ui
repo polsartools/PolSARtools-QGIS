@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>399</width>
-    <height>212</height>
+    <width>472</width>
+    <height>309</height>
    </rect>
   </property>
   <property name="font">
@@ -28,6 +28,9 @@
        </property>
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Provide path of NISAR RSLC/GSLC/GCOV .h5 file</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
@@ -53,6 +56,218 @@
     </layout>
    </item>
    <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QRadioButton" name="RSLC">
+       <property name="text">
+        <string>RSLC</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="GSLC">
+       <property name="text">
+        <string>GSLC</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="GCOV">
+       <property name="text">
+        <string>GCOV</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>matrix</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pp_mat">
+       <property name="toolTip">
+        <string>Select the SAR descriptor</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Select</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>C2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>T2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>C3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>T3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>C4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>T4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>C2HX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>C2VX</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>C2HV</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>azlks</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="pp_azlks">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="value">
+        <number>4</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>rglks</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="pp_rglks">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>99</number>
+       </property>
+       <property name="singleStep">
+        <number>1</number>
+       </property>
+       <property name="value">
+        <number>2</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Reciprocity</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pp_mat_4">
+       <property name="toolTip">
+        <string>if True, S12=S21; HV=VH</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>True</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>False</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Output format</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pp_mat_2">
+       <property name="toolTip">
+        <string>output file format</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>tif</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>bin</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>File compression</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="pp_mat_3">
+       <property name="toolTip">
+        <string>Set it True if you want Geotiff compression</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>False</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>True</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="nisar_help">
