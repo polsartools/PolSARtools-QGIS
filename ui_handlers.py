@@ -14,7 +14,7 @@ from osgeo import gdal
 import time
 
 from .resources import *
-from .SAR_Tools_dialog import PST_Dialog
+from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog
 from .qt_compat import (
     QtCore, QtGui, QtWidgets, Qt,
     DialogExec, MessageIcon, MessageButton,
@@ -24,6 +24,9 @@ from .qt_compat import (
 # Parameter-to-UI mapping (for Cob_parm)
 #################################################################################################
 COB_UI_MAP = {
+    "import": {
+        1: ["nisar_import"],
+    },
     "pp": {
         1: ["inFolder_pp", "pp_browse","pp_azlks","pp_rglks"],
         2: ["inFolder_pp", "pp_browse"],
@@ -66,32 +69,49 @@ COB_UI_MAP = {
 }
 
 def Cob_parm(self):
-    mode_map = {1: ("pp", self.dlg.pp_parm), 
-                2: ("fp", self.dlg.fp_parm), 
-                3: ("cp", self.dlg.cp_parm), 
-                4: ("dp", self.dlg.dp_parm)}
-    mode, widget = mode_map.get(self.dlg.tabWidget.currentIndex(), (None, None))
+    mode_map = {0: "import",
+                1: "pp", 
+                2: "fp", 
+                3: "cp", 
+                4: "dp"}
+    
+    current_tab = self.dlg.tabWidget.currentIndex()
+    mode = mode_map.get(current_tab)
+    
     if not mode:
         return
 
-    parm = widget.currentIndex()
-    enabled_widgets = COB_UI_MAP.get(mode, {}).get(parm, [])
-
-    # Disable all first
-    for w in [
-              "inFolder_pp", "pp_browse", "pp_azlks","pp_rglks","pp_mat",
-              "inFolder_fp", "fp_browse", 
-              "inFolder_cp", "cp_browse", "cp_sb_psi", "cp_sb_chi", 
-              "inFolder_dp", "dp_browse"]:
+    # Disable all widgets first to reset the UI
+    all_widgets = [
+        "nisar_import", "inFolder_pp", "pp_browse", "pp_azlks", "pp_rglks", "pp_mat",
+        "inFolder_fp", "fp_browse", "inFolder_cp", "cp_browse", "cp_sb_psi", "cp_sb_chi", 
+        "inFolder_dp", "dp_browse"
+    ]
+    for w in all_widgets:
         getattr(self.dlg, w).setEnabled(False)
+    
     self.dlg.pb_process.setEnabled(False)
 
-    # Enable required widgets
-    for w in enabled_widgets:
-        getattr(self.dlg, w).setEnabled(True)
-    if enabled_widgets:
-        self.dlg.pb_process.setEnabled(True)
+    # LOGIC FOR IMPORT TAB (Tab 0)
+    if mode == "import":
+        # Just enable the push buttons manually or via a list
+        self.dlg.nisar_import.setEnabled(True)
+        # We keep pb_process disabled for this tab since buttons open windows
+        return 
 
+    # LOGIC FOR OTHER TABS (Index-based)
+    widget_obj_map = {1: self.dlg.pp_parm, 2: self.dlg.fp_parm, 3: self.dlg.cp_parm, 4: self.dlg.dp_parm}
+    selector_widget = widget_obj_map.get(current_tab)
+    
+    if selector_widget:
+        parm = selector_widget.currentIndex()
+        enabled_widgets = COB_UI_MAP.get(mode, {}).get(parm, [])
+
+        for w in enabled_widgets:
+            getattr(self.dlg, w).setEnabled(True)
+        
+        if enabled_widgets:
+            self.dlg.pb_process.setEnabled(True)
 
 def show_error(self, text, title="Error!"):
     msgBox = QMessageBox()
@@ -226,3 +246,4 @@ def showTip(self):
     msgBox.setStandardButtons(MessageButton.Ok)
 
     returnValue = msgBox.exec()
+

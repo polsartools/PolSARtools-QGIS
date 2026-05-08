@@ -35,18 +35,23 @@
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
      <property name="spacing">
       <number>7</number>
      </property>
-     <item row="1" column="0">
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="enabled">
           <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
          </property>
          <property name="toolTip">
           <string/>
@@ -61,18 +66,115 @@
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>2</number>
+          <number>1</number>
          </property>
          <property name="movable">
           <bool>true</bool>
          </property>
-         <widget class="QWidget" name="tab">
+         <widget class="QWidget" name="import_data">
           <property name="enabled">
            <bool>true</bool>
           </property>
           <attribute name="title">
-           <string>-</string>
+           <string>Import</string>
           </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QScrollArea" name="scrollArea">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>522</width>
+                <height>300</height>
+               </rect>
+              </property>
+              <widget class="QPushButton" name="nisar_import">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>40</y>
+                 <width>80</width>
+                 <height>27</height>
+                </rect>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>NISAR</string>
+               </property>
+              </widget>
+              <widget class="QLabel" name="label_15">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>10</y>
+                 <width>91</width>
+                 <height>19</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>Spaceborne</string>
+               </property>
+              </widget>
+              <widget class="QLabel" name="label_16">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>130</y>
+                 <width>91</width>
+                 <height>19</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>Airborne</string>
+               </property>
+              </widget>
+              <widget class="QLabel" name="label_17">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>200</y>
+                 <width>91</width>
+                 <height>19</height>
+                </rect>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Arial</family>
+                </font>
+               </property>
+               <property name="text">
+                <string>Planetary</string>
+               </property>
+              </widget>
+             </widget>
+            </widget>
+           </item>
+          </layout>
          </widget>
          <widget class="QWidget" name="preprocess">
           <attribute name="title">
@@ -1035,6 +1137,11 @@ Shannon: Shannon entropy </string>
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
           <widget class="QPushButton" name="clear_terminal">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Reset the environment</string>
            </property>
@@ -1045,6 +1152,11 @@ Shannon: Shannon entropy </string>
          </item>
          <item>
           <widget class="QPushButton" name="pb_view">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Import data into QGIS for visualization!</string>
            </property>
@@ -1070,6 +1182,11 @@ Shannon: Shannon entropy </string>
        </item>
        <item>
         <widget class="QTextBrowser" name="terminal">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
          <property name="toolTip">
           <string>Processing log</string>
          </property>
@@ -1077,6 +1194,11 @@ Shannon: Shannon entropy </string>
        </item>
        <item>
         <widget class="QProgressBar" name="progressBar">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
          <property name="toolTip">
           <string>Process status</string>
          </property>
@@ -1087,12 +1209,17 @@ Shannon: Shannon entropy </string>
        </item>
       </layout>
      </item>
-     <item row="2" column="0">
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QPushButton" name="help_btn">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
+           </property>
            <property name="text">
             <string>Help</string>
            </property>
@@ -1113,6 +1240,11 @@ Shannon: Shannon entropy </string>
          </item>
          <item>
           <widget class="QPushButton" name="close_btn">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
+           </property>
            <property name="text">
             <string>Close</string>
            </property>
@@ -1120,6 +1252,11 @@ Shannon: Shannon entropy </string>
          </item>
          <item>
           <widget class="QPushButton" name="pb_process">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
+           </property>
            <property name="toolTip">
             <string>Start processing</string>
            </property>
@@ -1144,6 +1281,11 @@ Shannon: Shannon entropy </string>
        </item>
        <item>
         <widget class="QLabel" name="label_8">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+          </font>
+         </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;© Jointly developed &lt;a href=&quot;http://www.mrslab.in/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;MRSLab&lt;/span&gt;&lt;/a&gt;, IIT Bombay and &lt;a href=&quot;https://www.umass.edu/microwave-remote-sensing/about/about-mirsl&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;MiRSL&lt;/span&gt;&lt;/a&gt;, UMass Amherst. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>

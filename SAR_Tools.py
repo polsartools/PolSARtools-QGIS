@@ -11,7 +11,7 @@ import platform
 import subprocess
 import importlib.util
 
-from .SAR_Tools_dialog import PST_Dialog
+from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog
 from .qt_compat import DialogExec, MessageIcon, MessageButton
 
 # Import helpers
@@ -82,69 +82,11 @@ class PolSAR(object):
 
         self.dlg.tabWidget.currentChanged.connect(self.Cob_parm)
 
+        # sensors
+        self.dlg.nisar_import.clicked.connect(self.open_nisar_import)
+
         self.check_pstools()
 
-    # def check_pstools(self):
-    #     try:
-    #         import polsartools
-    #     except ImportError:
-    #         pip_main(['install', 'polsartools'])
-
-    # def check_pstools(self):
-    #     try:
-    #         import polsartools
-    #     except ImportError:
-    #         try:
-    #             import sys
-    #             import io
-    #             if sys.stderr is None:
-    #                 sys.stderr = io.StringIO()
-
-    #             from pip._internal import main as pip_main
-    #             pip_main(['install', 'polsartools'])
-
-    #             # Try importing again after installation
-    #             import polsartools
-    #         except Exception as e:
-    #             from qgis.PyQt.QtWidgets import QMessageBox
-    #             QMessageBox.critical(None, "Plugin Error", f"Failed to install 'polsartools': {e}")
-    #             # pass
-
-
-    # def check_pstools(self):
-    #     try:
-    #         import polsartools
-    #     except ImportError:
-    #         try:
-    #             os_type = platform.system()
-
-    #             if os_type == "Windows":
-    #                 subprocess.check_call([sys.executable, "-m", "pip", "install", "polsartools"])
-
-    #             elif os_type == "Linux":
-    #                 # Linux may block pip installs in system Python (PEP 668)
-    #                 try:
-    #                     subprocess.check_call([sys.executable, "-m", "pip", "install", "polsartools"])
-    #                 except subprocess.CalledProcessError as e:
-    #                     QMessageBox.critical(None, "Plugin Error",
-    #                         "Linux system Python may be externally managed.\n"
-    #                         "Try installing 'polsartools' manually in a virtual environment or using pipx.\n\n"
-    #                         f"Error: {e}")
-    #                     return
-
-    #             elif os_type == "Darwin":  # macOS
-    #                 subprocess.check_call([sys.executable, "-m", "pip", "install", "polsartools"])
-
-    #             else:
-    #                 QMessageBox.critical(None, "Plugin Error",
-    #                     f"Unsupported OS: {os_type}. Please install 'polsartools' manually.")
-    #                 return
-
-    #             # Try importing again after installation
-    #             import polsartools
-
-    #         except Exception as e:
-    #             QMessageBox.critical(None, "Plugin Error", f"Failed to install 'polsartools': {e}")
 
     def check_pstools(self):
         if importlib.util.find_spec("polsartools") is not None:
@@ -192,11 +134,17 @@ class PolSAR(object):
     def log(self, message): self.dlg.terminal.append(f"(polsartools) $ {message}")
 
     def startProcess(self):
-        mode_map = {1: "pp", 2: "fp", 3: "cp", 4: "dp"}
+        mode_map = {0: "import",1: "pp", 2: "fp", 3: "cp", 4: "dp"}
         mode = mode_map.get(self.dlg.tabWidget.currentIndex())
         if not mode:
             return
-
+        
+        
+        if mode == "import":
+        
+            return
+        
+        
         indX = (self.dlg.fp_parm.currentIndex() if mode == "fp"
                 else self.dlg.cp_parm.currentIndex() if mode == "cp"
                 else self.dlg.dp_parm.currentIndex() if mode == "dp"
@@ -274,6 +222,17 @@ class PolSAR(object):
         logger.append("\t-----------------------------------------------------------------\n")
         logger.append('Tip: Start by selecting a function from the "Select function" dropdown menu.\n')
 
+
+    # def open_nisar_import(self):
+           
+    #         self.nisar_window = Nisar_Dialog(self.dlg)
+    #         self.nisar_window.show()
+
+    def open_nisar_import(self):
+        # Pass self.dlg (the QDialog widget) instead of self (the class)
+        self.nisar_win = Nisar_Dialog(self.dlg) 
+        self.nisar_win.logic_parent = self 
+        self.nisar_win.show()
 #################################################################################################
 # Exception
 #################################################################################################

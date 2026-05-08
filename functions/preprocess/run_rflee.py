@@ -7,6 +7,6 @@ if __name__ == "__main__":
     in_folder = sys.argv[1]
     ws_path = int(sys.argv[2])
     print(f"(polsartools) $ Running rlee with {in_folder} and {ws_path}", flush=True)
-    pst.rlee(in_folder, ws_path, 
+    pst.filter_refined_lee(in_folder, ws_path, 
               progress_callback=progress_callback
               )
