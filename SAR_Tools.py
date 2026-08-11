@@ -1,10 +1,10 @@
-# SAR_Tools.py
+# polsar_tools/SAR_Tools.py
 from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtWidgets import *
 from qgis.PyQt.QtGui import *
 import os, multiprocessing, webbrowser
 
-from pip._internal import main as pip_main
+# from pip._internal import main as pip_main
 
 import sys
 import platform
@@ -87,38 +87,45 @@ class PolSAR(object):
 
         self.check_pstools()
 
+    def is_flatpak(self):
+        """Checks if the current process is running inside a Flatpak container."""
+        return os.path.exists("/.flatpak-info") or "FLATPAK_ID" in os.environ
 
     def check_pstools(self):
         if importlib.util.find_spec("polsartools") is not None:
             return  # Already installed
 
+        # Handle Flatpak environment early
+        if self.is_flatpak():
+            QMessageBox.critical(None, "Plugin Error",
+                "QGIS is running inside a Flatpak sandbox container.\n\n"
+                "Automatic installation is blocked due to container isolation.\n\n"
+                "To install 'polsartools' for Flatpak QGIS, open your host system terminal "
+                "and run this following command:\n\n"
+                "flatpak run --devel --command=pip3 org.qgis.qgis install \"polsartools\" \"numpy<2\" --user\n\n"
+                "After installation, please restart QGIS.")
+            return
+
         os_type = platform.system()
-        base_cmd = [sys.executable, "-m", "pip", "install", "polsartools"]
+        base_cmd = [sys.executable, "-m", "pip", "install", "--user", "polsartools"]
 
         try:
             if os_type == "Linux":
                 try:
-                    # Try normal install first
                     subprocess.check_call(base_cmd)
                 except subprocess.CalledProcessError:
-                    # Retry with --break-system-packages
                     try:
                         subprocess.check_call(base_cmd + ["--break-system-packages"])
                     except subprocess.CalledProcessError as e:
                         QMessageBox.critical(None, "Plugin Error",
-                            "Linux system Python blocks pip installs due to PEP 668.\n\n"
-                            "To install 'polsartools' system-wide, you can run:\n"
-                            "  python3 -m pip install polsartools --break-system-packages\n\n"
-                            "Or use a virtual environment:\n"
-                            "  python3 -m venv myenv && source myenv/bin/activate\n"
-                            "  pip install polsartools\n\n"
+                            "Linux blocks system-wide pip installs.\n\n"
+                            "To install manually, run in your terminal:\n"
+                            "python3 -m pip install polsartools --user --break-system-packages\n\n"
                             f"Error: {e}")
                         return
 
-            elif os_type in [ "Darwin"]:  # macOS
+            elif os_type in ["Windows", "Darwin"]:
                 subprocess.check_call(base_cmd)
-            elif os_type in ["Windows"]:
-                pip_main(['install', 'polsartools'])
 
             else:
                 QMessageBox.critical(None, "Plugin Error",
@@ -127,9 +134,9 @@ class PolSAR(object):
 
         except Exception as e:
             QMessageBox.critical(None, "Plugin Error",
-                f"Failed to install 'polsartools': {e}")
-
-            
+                f"Failed to automatically install 'polsartools': {e}\n\n"
+                "Please install it manually using pip.")
+                
     def tr(self, message): return QCoreApplication.translate('PolSAR', message)
     def log(self, message): self.dlg.terminal.append(f"(polsartools) $ {message}")
 
@@ -141,7 +148,6 @@ class PolSAR(object):
         
         
         if mode == "import":
-        
             return
         
         
@@ -223,13 +229,7 @@ class PolSAR(object):
         logger.append('Tip: Start by selecting a function from the "Select function" dropdown menu.\n')
 
 
-    # def open_nisar_import(self):
-           
-    #         self.nisar_window = Nisar_Dialog(self.dlg)
-    #         self.nisar_window.show()
-
     def open_nisar_import(self):
-        # Pass self.dlg (the QDialog widget) instead of self (the class)
         self.nisar_win = Nisar_Dialog(self.dlg) 
         self.nisar_win.logic_parent = self 
         self.nisar_win.show()

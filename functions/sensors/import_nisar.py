@@ -1,15 +1,9 @@
+# polsar_tools/functions/sensors/import_nisar.py
+
 import sys,os
 import polsartools as pst  
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from functions.utils.utils import progress_callback
-
-# if __name__ == "__main__":
-#     in_file = sys.argv[1]
-    
-#     print(f"(polsartools) $ Running NISAR with {in_file} ", flush=True)
-#     pst.import_nisar_gcov(in_file, 
-#               progress_callback=progress_callback
-#               )
 
 
 if __name__ == "__main__":
@@ -23,18 +17,18 @@ if __name__ == "__main__":
     out_format   = sys.argv[7]
     compression  = sys.argv[8] == 'true'
     
-    print(f"(polsartools) $ Processing {product_type} product: {in_file}", flush=True)
-    print(f"(polsartools) $ Matrix: {matrix_type}, Looks: {azlks}x{rglks}", flush=True)
+    print(f" Processing {product_type} product: {in_file}", flush=True)
+    print(f" Matrix: {matrix_type}, Looks: {azlks}x{rglks}", flush=True)
 
     if product_type == "GCOV":
-        # Call your library function with all parameters
+        
         pst.import_nisar_gcov(
             in_file, 
             # product_type=product_type,
-            mat=matrix_type,
+            # mat=matrix_type,
             azlks=azlks,
             rglks=rglks,
-            recip=reciprocity,
+            # recip=reciprocity,
             fmt=out_format,
             comp=compression,
             progress_callback=progress_callback
@@ -62,4 +56,4 @@ if __name__ == "__main__":
             progress_callback=progress_callback
         )
     else:
-        print(f"(polsartools) $ Unknown product type: {product_type}", flush=True)
+        print(f" Unknown product type: {product_type}", flush=True)

@@ -1,3 +1,4 @@
+# polsar_tools/process_runner.py
 import os,re
 from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtWidgets import *
@@ -109,19 +110,101 @@ def run_process(self, label, script_name, extra_args=None, is_import=False):
 #################################################################################################
 # Handlers (stdout/stderr/progress)
 #################################################################################################
+# def handle_stdout(self):
+#     output = self.process.readAllStandardOutput().data().decode()
+#     for line in output.splitlines():
+#         self.log(line.strip())
+#         match = re.search(r'progress: (\d+)', line)
+#         if match:
+#             self.pBarupdate(int(match.group(1)))
 def handle_stdout(self):
     output = self.process.readAllStandardOutput().data().decode()
     for line in output.splitlines():
-        self.log(line.strip())
-        match = re.search(r'progress: (\d+)', line)
+        cleaned_line = line.strip()
+        if not cleaned_line:
+            continue
+            
+        match = re.search(r'progress:\s*(\d+)', cleaned_line)
         if match:
-            self.pBarupdate(int(match.group(1)))
+            val = int(match.group(1))
+            self.pBarupdate(val)
+            
+            progress_text = f"(polsartools) $ progress: {val}%"
+            terminal = self.dlg.terminal
+            document = terminal.document()
+            cursor = terminal.textCursor()
+            
+            if getattr(self, '_progress_line_active', False):
+                # Move directly to the very last block of the document safely
+                cursor.movePosition(QTextCursor.MoveOperation.End)
+                cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+                
+                # Select the entire text of this last block
+                cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+                
+                # Replace the text of that exact line in-place
+                cursor.removeSelectedText()
+                cursor.insertText(progress_text)
+            else:
+                # First time seeing progress, append it normally
+                self.log(f"progress: {val}%")
+                self._progress_line_active = True
+                
+        elif "Writing files..." in cleaned_line:
+            self._progress_line_active = False
+            if not getattr(self, '_writing_logged', False):
+                self.log("Writing files...")
+                self._writing_logged = True
+        else:
+            self._progress_line_active = False
+            self.log(cleaned_line)
+
+# def handle_stdout(self):
+#     output = self.process.readAllStandardOutput().data().decode()
+#     for line in output.splitlines():
+#         cleaned_line = line.strip()
+#         if not cleaned_line:
+#             continue
+            
+#         match = re.search(r'progress:\s*(\d+)', cleaned_line)
+#         if match:
+#             val = int(match.group(1))
+#             self.pBarupdate(val)
+            
+#             # --- Dynamic Single-Line Log Update ---
+#             progress_text = f"(polsartools) $ progress: {val}%"
+            
+#             terminal = self.dlg.terminal
+#             document = terminal.document()
+#             last_block_text = document.lastBlock().text()
+            
+#             cursor = terminal.textCursor()
+            
+#             if "progress:" in last_block_text:
+#                 # Move to the end and replace the existing progress line in-place
+#                 cursor.movePosition(QTextCursor.MoveOperation.End)
+#                 cursor.select(QTextCursor.SelectionType.BlockUnderCursor)
+#                 cursor.removeSelectedText()
+#                 cursor.insertText(progress_text)
+#             else:
+#                 # If the last line wasn't progress, append it normally
+#                 self.log(f"progress: {val}%")
+                
+#         elif "Writing files..." in cleaned_line:
+#             if not getattr(self, '_writing_logged', False):
+#                 self.log("Writing files...")
+#                 self._writing_logged = True
+#         else:
+#             self.log(cleaned_line)
+
 
 def handle_stderr(self):
     error_output = self.process.readAllStandardError().data().decode().strip()
     print("QProcess Error:", error_output)
 
 def handle_finished(self, exitCode, exitStatus):
+    self._writing_logged = False
+    self._progress_line_active = False
     self.log("Ready to process.")
     # path = os.path.realpath(self.inFolder)
 
@@ -150,5 +233,10 @@ def handle_finished(self, exitCode, exitStatus):
     print(f"Process finished with exit code: {exitCode}, status: {exitStatus}")
 
 
+# def pBarupdate(self, signal):
+#     self.dlg.progressBar.setValue(int(signal))
+
 def pBarupdate(self, signal):
     self.dlg.progressBar.setValue(int(signal))
+    # Forces immediate visual refresh of just the progress bar widget safely
+    self.dlg.progressBar.repaint()
