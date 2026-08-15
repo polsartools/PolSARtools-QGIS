@@ -241,9 +241,9 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_12">
                  <item>
-                  <widget class="QPushButton" name="nisar_import_3">
+                  <widget class="QPushButton" name="uavsar_import">
                    <property name="enabled">
-                    <bool>false</bool>
+                    <bool>true</bool>
                    </property>
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -262,7 +262,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="nisar_import_4">
+                  <widget class="QPushButton" name="asar_import">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -283,7 +283,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="nisar_import_5">
+                  <widget class="QPushButton" name="esar_import">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>

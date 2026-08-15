@@ -73,3 +73,19 @@ class Biomass_Dialog(QtWidgets.QDialog, BIOMASS_FORM_CLASS):
         self.biomass_help.clicked.connect(lambda: biomass_help_fn(self))
         self.biomass_close.clicked.connect(lambda: biomass_close_fn(self))
         self.biomass_import.clicked.connect(lambda: biomass_import_process(self))
+
+from .UI.uavsar_ui_handler import uavsar_browse_fn, uavsar_help_fn, uavsar_close_fn, uavsar_import_process
+
+UAVSAR_FORM_CLASS, _ = uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), './UI/UAVSAR.ui'))
+
+class Uavsar_Dialog(QtWidgets.QDialog, UAVSAR_FORM_CLASS):
+    def __init__(self, parent=None):
+        super(Uavsar_Dialog, self).__init__(parent)
+        self.setupUi(self)
+
+        # Mapping buttons to handler functions
+        self.uavsar_browse.clicked.connect(lambda: uavsar_browse_fn(self))
+        self.uavsar_help.clicked.connect(lambda: uavsar_help_fn(self))
+        self.uavsar_close.clicked.connect(lambda: uavsar_close_fn(self))
+        self.uavsar_import.clicked.connect(lambda: uavsar_import_process(self))

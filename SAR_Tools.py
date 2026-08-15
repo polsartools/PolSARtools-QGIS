@@ -11,7 +11,7 @@ import platform
 import subprocess
 import importlib.util
 
-from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog, Biomass_Dialog
+from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog, Biomass_Dialog,Uavsar_Dialog
 from .qt_compat import DialogExec, MessageIcon, MessageButton
 
 # Import helpers
@@ -89,6 +89,7 @@ class PolSAR(object):
         # sensors
         self.dlg.nisar_import.clicked.connect(self.open_nisar_import)
         self.dlg.biomass_import.clicked.connect(self.open_biomass_import)
+        self.dlg.uavsar_import.clicked.connect(self.open_uavsar_import)
 
         self.start_writing_animation = start_writing_animation.__get__(self)
         self.stop_writing_animation = stop_writing_animation.__get__(self)
@@ -246,6 +247,10 @@ class PolSAR(object):
         self.biomass_win = Biomass_Dialog(self.dlg) 
         self.biomass_win.logic_parent = self 
         self.biomass_win.show()
+    def open_uavsar_import(self):
+        self.uavsar_win = Uavsar_Dialog(self.dlg) 
+        self.uavsar_win.logic_parent = self 
+        self.uavsar_win.show()
 #################################################################################################
 # Exception
 #################################################################################################
