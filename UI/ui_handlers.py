@@ -13,9 +13,9 @@ import re
 from osgeo import gdal
 import time
 
-from .resources import *
-from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog
-from .qt_compat import (
+from ..resources import *
+# from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog
+from ..qt_compat import (
     QtCore, QtGui, QtWidgets, Qt,
     DialogExec, MessageIcon, MessageButton,
     AlignmentFlag, Key, PYQT_VERSION

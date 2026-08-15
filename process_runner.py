@@ -24,6 +24,7 @@ import subprocess
 PROCESS_MAP = {
     "import": {
         1: ("NISAR pst", "functions/sensors/import_nisar.py", []),
+        2: ("BIOMASS pst", "functions/sensors/import_biomass.py", []),
     },
 
     "pp": {
