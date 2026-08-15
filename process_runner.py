@@ -78,7 +78,7 @@ PROCESS_MAP = {
 
 def run_process(self, label, script_name, extra_args=None, is_import=False):
     self.dlg.progressBar.setValue(0)
-    self.log(f"Calculating {label}...")
+    self.log(f"Processing {label}...")
     self.process = QProcess()
 
     if platform.system() == "Windows":
@@ -89,7 +89,6 @@ def run_process(self, label, script_name, extra_args=None, is_import=False):
     script_path = os.path.join(os.path.dirname(__file__), script_name)
     
     if is_import:
-        # Matches sys.argv[1] in your script
         # args[0] is the script path, args[1] is the input path
         args = [script_path] 
     else:
@@ -110,13 +109,6 @@ def run_process(self, label, script_name, extra_args=None, is_import=False):
 #################################################################################################
 # Handlers (stdout/stderr/progress)
 #################################################################################################
-# def handle_stdout(self):
-#     output = self.process.readAllStandardOutput().data().decode()
-#     for line in output.splitlines():
-#         self.log(line.strip())
-#         match = re.search(r'progress: (\d+)', line)
-#         if match:
-#             self.pBarupdate(int(match.group(1)))
 def handle_stdout(self):
     output = self.process.readAllStandardOutput().data().decode()
     for line in output.splitlines():
@@ -131,34 +123,30 @@ def handle_stdout(self):
             
             progress_text = f"(polsartools) $ progress: {val}%"
             terminal = self.dlg.terminal
-            document = terminal.document()
             cursor = terminal.textCursor()
             
             if getattr(self, '_progress_line_active', False):
-                # Move directly to the very last block of the document safely
                 cursor.movePosition(QTextCursor.MoveOperation.End)
                 cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
-                
-                # Select the entire text of this last block
                 cursor.select(QTextCursor.SelectionType.LineUnderCursor)
-                
-                # Replace the text of that exact line in-place
                 cursor.removeSelectedText()
                 cursor.insertText(progress_text)
             else:
-                # First time seeing progress, append it normally
                 self.log(f"progress: {val}%")
                 self._progress_line_active = True
                 
         elif "Writing files..." in cleaned_line:
             self._progress_line_active = False
             if not getattr(self, '_writing_logged', False):
-                self.log("Writing files...")
                 self._writing_logged = True
+                # START THE DOT ANIMATION HERE
+                self.start_writing_animation()
         else:
+            if getattr(self, '_writing_timer', None) and self._writing_timer.isActive():
+                self.stop_writing_animation("Writing files completed.")
+                
             self._progress_line_active = False
             self.log(cleaned_line)
-
 # def handle_stdout(self):
 #     output = self.process.readAllStandardOutput().data().decode()
 #     for line in output.splitlines():
@@ -171,38 +159,45 @@ def handle_stdout(self):
 #             val = int(match.group(1))
 #             self.pBarupdate(val)
             
-#             # --- Dynamic Single-Line Log Update ---
 #             progress_text = f"(polsartools) $ progress: {val}%"
-            
 #             terminal = self.dlg.terminal
 #             document = terminal.document()
-#             last_block_text = document.lastBlock().text()
-            
 #             cursor = terminal.textCursor()
             
-#             if "progress:" in last_block_text:
-#                 # Move to the end and replace the existing progress line in-place
+#             if getattr(self, '_progress_line_active', False):
+#                 # Move directly to the very last block of the document safely
 #                 cursor.movePosition(QTextCursor.MoveOperation.End)
-#                 cursor.select(QTextCursor.SelectionType.BlockUnderCursor)
+#                 cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+                
+#                 # Select the entire text of this last block
+#                 cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+                
+#                 # Replace the text of that exact line in-place
 #                 cursor.removeSelectedText()
 #                 cursor.insertText(progress_text)
 #             else:
-#                 # If the last line wasn't progress, append it normally
+#                 # First time seeing progress, append it normally
 #                 self.log(f"progress: {val}%")
+#                 self._progress_line_active = True
                 
 #         elif "Writing files..." in cleaned_line:
+#             self._progress_line_active = False
 #             if not getattr(self, '_writing_logged', False):
 #                 self.log("Writing files...")
 #                 self._writing_logged = True
 #         else:
+#             self._progress_line_active = False
 #             self.log(cleaned_line)
-
 
 def handle_stderr(self):
     error_output = self.process.readAllStandardError().data().decode().strip()
     print("QProcess Error:", error_output)
 
 def handle_finished(self, exitCode, exitStatus):
+    # Ensure any active timer is cleanly stopped upon completion
+    if hasattr(self, '_writing_timer') and self._writing_timer.isActive():
+        self.stop_writing_animation("Writing files finished.")
+
     self._writing_logged = False
     self._progress_line_active = False
     self.log("Ready to process.")
@@ -240,3 +235,90 @@ def pBarupdate(self, signal):
     self.dlg.progressBar.setValue(int(signal))
     # Forces immediate visual refresh of just the progress bar widget safely
     self.dlg.progressBar.repaint()
+
+
+from qgis.PyQt.QtCore import QTimer
+def start_writing_animation(self):
+    """Starts a timer that cycles through a braille rotation spinner."""
+    if hasattr(self, '_writing_timer') and self._writing_timer.isActive():
+        return
+        
+    # Define your Braille rotation sequence
+    spinner_frames = ['⣀', '⣄', '⣤', '⣦', '⣶', '⣷', '⣿', '⣷', '⣶', '⣦', '⣤', '⣄']
+    self._spinner_index = 0
+    
+    self._writing_timer = QTimer()
+    self._writing_timer.setInterval(150) # Speed of rotation (150ms feels smooth and snappy)
+    
+    def update_spinner():
+        char = spinner_frames[self._spinner_index]
+        self._spinner_index = (self._spinner_index + 1) % len(spinner_frames)
+        
+        text = f"(polsartools) $ Writing files {char} "
+        
+        terminal = self.dlg.terminal
+        cursor = terminal.textCursor()
+        cursor.movePosition(QTextCursor.MoveOperation.End)
+        cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+        cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+        cursor.removeSelectedText()
+        cursor.insertText(text)
+        
+    self._writing_timer.timeout.connect(update_spinner)
+    
+    # Print the initial spinner frame and start the ticker
+    self.log(f"Writing files {spinner_frames[0]} ")
+    self._writing_timer.start()
+
+def stop_writing_animation(self, final_message="Writing files complete."):
+    """Stops the animation timer and locks in the final state."""
+    if hasattr(self, '_writing_timer') and self._writing_timer.isActive():
+        self._writing_timer.stop()
+        
+        terminal = self.dlg.terminal
+        cursor = terminal.textCursor()
+        cursor.movePosition(QTextCursor.MoveOperation.End)
+        cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+        cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+        cursor.removeSelectedText()
+        cursor.insertText(f"(polsartools) $ {final_message}")
+# def start_writing_animation(self):
+#     """Starts a timer that cycles through animated dots on the active line."""
+#     if hasattr(self, '_writing_timer') and self._writing_timer.isActive():
+#         return
+        
+#     self._dot_count = 1
+#     self._writing_timer = QTimer()
+#     self._writing_timer.setInterval(400) # Speed of animation (400ms per tick)
+    
+#     def update_dots():
+#         self._dot_count = (self._dot_count % 3) + 1
+#         dots = "." * self._dot_count
+#         text = f"(polsartools) $ Writing files{dots}"
+        
+#         terminal = self.dlg.terminal
+#         cursor = terminal.textCursor()
+#         cursor.movePosition(QTextCursor.MoveOperation.End)
+#         cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+#         cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+#         cursor.removeSelectedText()
+#         cursor.insertText(text)
+        
+#     self._writing_timer.timeout.connect(update_dots)
+    
+#     # Print the initial line and start the ticker
+#     self.log("Writing files.")
+#     self._writing_timer.start()
+
+# def stop_writing_animation(self, final_message="Writing files complete."):
+#     """Stops the animation timer and locks in the final state."""
+#     if hasattr(self, '_writing_timer') and self._writing_timer.isActive():
+#         self._writing_timer.stop()
+        
+#         terminal = self.dlg.terminal
+#         cursor = terminal.textCursor()
+#         cursor.movePosition(QTextCursor.MoveOperation.End)
+#         cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+#         cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+#         cursor.removeSelectedText()
+#         cursor.insertText(f"(polsartools) $ {final_message}")

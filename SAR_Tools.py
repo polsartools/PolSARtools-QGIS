@@ -15,7 +15,11 @@ from .SAR_Tools_dialog import PST_Dialog, Nisar_Dialog
 from .qt_compat import DialogExec, MessageIcon, MessageButton
 
 # Import helpers
-from .process_runner import PROCESS_MAP, run_process, handle_stdout, handle_stderr, handle_finished, pBarupdate
+# from .process_runner import PROCESS_MAP, run_process, handle_stdout, handle_stderr, handle_finished, pBarupdate
+from .process_runner import (
+    PROCESS_MAP, run_process, handle_stdout, handle_stderr, 
+    handle_finished, pBarupdate, start_writing_animation, stop_writing_animation
+)
 from .ui_handlers import Cob_parm, openRaster, viewData, clear_log, psi_update, chi_update, ws_update, closeui_fn, showTip
 
 
@@ -84,6 +88,9 @@ class PolSAR(object):
 
         # sensors
         self.dlg.nisar_import.clicked.connect(self.open_nisar_import)
+
+        self.start_writing_animation = start_writing_animation.__get__(self)
+        self.stop_writing_animation = stop_writing_animation.__get__(self)
 
         self.check_pstools()
 

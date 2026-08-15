@@ -69,7 +69,7 @@ def nisar_import_process(self):
         is_import=True
     )
     
-    # self.close()
+    self.close()
 
 
 def nisar_close_fn(self):
