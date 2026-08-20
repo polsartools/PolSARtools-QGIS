@@ -36,10 +36,10 @@ if __name__ == "__main__":
     elif product_type == "L1B":
         pst.import_biomass_l1b(
             in_file, 
-            mat=matrix_type,
-            azlks=azlks,
-            rglks=rglks,
-            recip=reciprocity,
+            # mat=matrix_type,
+            # azlks=azlks,
+            # rglks=rglks,
+            # recip=reciprocity,
             fmt=out_format,
             comp=compression,
             # progress_callback=progress_callback

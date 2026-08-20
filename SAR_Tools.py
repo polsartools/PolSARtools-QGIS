@@ -100,52 +100,148 @@ class PolSAR(object):
         """Checks if the current process is running inside a Flatpak container."""
         return os.path.exists("/.flatpak-info") or "FLATPAK_ID" in os.environ
 
+    # def check_pstools(self):
+    #     if importlib.util.find_spec("polsartools") is not None:
+    #         return  # Already installed
+
+    #     # Handle Flatpak environment early
+    #     if self.is_flatpak():
+    #         QMessageBox.critical(None, "Plugin Error",
+    #             "QGIS is running inside a Flatpak sandbox container.\n\n"
+    #             "Automatic installation is blocked due to container isolation.\n\n"
+    #             "To install 'polsartools' for Flatpak QGIS, open your host system terminal "
+    #             "and run this following command:\n\n"
+    #             "flatpak run --devel --command=pip3 org.qgis.qgis install \"polsartools\" \"numpy<2\" --user\n\n"
+    #             "After installation, please restart QGIS.")
+    #         return
+
+    #     os_type = platform.system()
+    #     # base_cmd = [sys.executable, "-m", "pip", "install", "--user", "polsartools"]
+    #     base_cmd = [sys.executable, "-m", "pip", "install", "--user", "polsartools", "numpy<2"]
+
+    #     try:
+    #         if os_type == "Linux":
+    #             try:
+    #                 subprocess.check_call(base_cmd)
+    #             except subprocess.CalledProcessError:
+    #                 try:
+    #                     subprocess.check_call(base_cmd + ["--break-system-packages"])
+    #                 except subprocess.CalledProcessError as e:
+    #                     QMessageBox.critical(None, "Plugin Error",
+    #                         "Linux blocks system-wide pip installs.\n\n"
+    #                         "To install manually, run in your terminal:\n"
+    #                         f"{sys.executable} -m pip install polsartools numpy<2 --user --break-system-packages\n\n"
+    #                         f"Error: {e}")
+    #                     return
+
+    #         elif os_type in ["Windows", "Darwin"]:
+    #             subprocess.check_call(base_cmd)
+
+    #         else:
+    #             QMessageBox.critical(None, "Plugin Error",
+    #                 f"Unsupported OS: {os_type}. Please install 'polsartools' manually.")
+    #             return
+
+    #     except Exception as e:
+    #         QMessageBox.critical(None, "Plugin Error",
+    #             f"Failed to automatically install 'polsartools': {e}\n\n"
+    #             "Please install it manually using pip.")
     def check_pstools(self):
         if importlib.util.find_spec("polsartools") is not None:
             return  # Already installed
 
-        # Handle Flatpak environment early
-        if self.is_flatpak():
-            QMessageBox.critical(None, "Plugin Error",
-                "QGIS is running inside a Flatpak sandbox container.\n\n"
-                "Automatic installation is blocked due to container isolation.\n\n"
-                "To install 'polsartools' for Flatpak QGIS, open your host system terminal "
-                "and run this following command:\n\n"
-                "flatpak run --devel --command=pip3 org.qgis.qgis install \"polsartools\" \"numpy<2\" --user\n\n"
-                "After installation, please restart QGIS.")
-            return
-
         os_type = platform.system()
-        base_cmd = [sys.executable, "-m", "pip", "install", "--user", "polsartools"]
+        base_cmd = [sys.executable, "-m", "pip", "install", "--user", "polsartools", "numpy<2"]
 
-        try:
-            if os_type == "Linux":
-                try:
-                    subprocess.check_call(base_cmd)
-                except subprocess.CalledProcessError:
-                    try:
-                        subprocess.check_call(base_cmd + ["--break-system-packages"])
-                    except subprocess.CalledProcessError as e:
-                        QMessageBox.critical(None, "Plugin Error",
-                            "Linux blocks system-wide pip installs.\n\n"
-                            "To install manually, run in your terminal:\n"
-                            "python3 -m pip install polsartools --user --break-system-packages\n\n"
-                            f"Error: {e}")
-                        return
-
-            elif os_type in ["Windows", "Darwin"]:
-                subprocess.check_call(base_cmd)
-
-            else:
+        # ---------------------------------------------------------
+        # LINUX HANDLING
+        # ---------------------------------------------------------
+        if os_type == "Linux":
+            
+            # 1. Check for Flatpak isolation
+            if self.is_flatpak():
                 QMessageBox.critical(None, "Plugin Error",
-                    f"Unsupported OS: {os_type}. Please install 'polsartools' manually.")
+                    "QGIS is running inside a Flatpak sandbox container.\n\n"
+                    "Automatic installation is blocked due to container isolation.\n\n"
+                    "To install 'polsartools' for Flatpak QGIS, open your host system terminal "
+                    "and run this following command:\n\n"
+                    "flatpak run --devel --command=pip3 org.qgis.qgis install \"polsartools\" \"numpy<2\" --user\n\n"
+                    "After installation, please restart QGIS.")
                 return
 
-        except Exception as e:
-            QMessageBox.critical(None, "Plugin Error",
-                f"Failed to automatically install 'polsartools': {e}\n\n"
-                "Please install it manually using pip.")
+            # 2. Check if pip is missing (common on Ubuntu/Debian)
+            if importlib.util.find_spec("pip") is None:
+                QMessageBox.critical(None, "Missing Dependency: pip",
+                    "Your system Python is missing 'pip', which is required to install packages.\n\n"
+                    "Please open your system terminal and run these commands:\n\n"
+                    "sudo apt update\n"
+                    "sudo apt install python3-pip\n\n"
+                    f"Then run:\n{sys.executable} -m pip install polsartools \"numpy<2\" --user --break-system-packages\n\n"
+                    "After running them, please restart QGIS.")
+                return
+
+            # 3. Attempt installation (handling PEP 668 system protections)
+            try:
+                subprocess.check_call(base_cmd)
+            except subprocess.CalledProcessError:
+                try:
+                    subprocess.check_call(base_cmd + ["--break-system-packages"])
+                except subprocess.CalledProcessError as e:
+                    QMessageBox.critical(None, "Plugin Error",
+                        "Linux blocks system-wide pip installs.\n\n"
+                        "To install manually, open your terminal and run:\n"
+                        f'{sys.executable} -m pip install polsartools "numpy<2" --user --break-system-packages\n\n'
+                        f"Error details: {e}")
+                    return
+
+        # ---------------------------------------------------------
+        # WINDOWS & macOS HANDLING
+        # ---------------------------------------------------------
+        elif os_type in ["Windows", "Darwin"]:
+            
+            # 1. Try to auto-recover missing pip using built-in ensurepip
+            if importlib.util.find_spec("pip") is None:
+                try:
+                    import ensurepip
+                    ensurepip.bootstrap()
+                except Exception:
+                    pass
                 
+                # Re-check if pip is still missing
+                if importlib.util.find_spec("pip") is None:
+                    QMessageBox.critical(None, "Missing Dependency: pip",
+                        "Your Python environment is missing 'pip'.\n\n"
+                        "Please open your command prompt / terminal and run:\n"
+                        f"{sys.executable} -m ensurepip --default-pip\n\n"
+                        "After running it, please restart QGIS.")
+                    return
+
+            # 2. Attempt standard user installation
+            try:
+                subprocess.check_call(base_cmd)
+            except subprocess.CalledProcessError as e:
+                QMessageBox.critical(None, "Plugin Error",
+                    f"Failed to automatically install 'polsartools'.\n\n"
+                    f'Please install manually via terminal/command prompt:\n'
+                    f'{sys.executable} -m pip install polsartools "numpy<2" --user\n\n'
+                    f"Error details: {e}")
+                return
+
+        # ---------------------------------------------------------
+        # UNSUPPORTED OS
+        # ---------------------------------------------------------
+        else:
+            QMessageBox.critical(None, "Plugin Error",
+                f"Unsupported OS: {os_type}. Please install 'polsartools' manually.")
+            return
+
+        # ---------------------------------------------------------
+        # SUCCESS NOTIFICATION
+        # ---------------------------------------------------------
+        QMessageBox.information(None, "Success", 
+            "'polsartools' was successfully installed! Please restart the plugin.")
+
+    
     def tr(self, message): return QCoreApplication.translate('PolSAR', message)
     def log(self, message): self.dlg.terminal.append(f"(polsartools) $ {message}")
 
